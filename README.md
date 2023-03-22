@@ -21,27 +21,32 @@ The winning player will have adjacently aligned three of their designated marker
 
 ***Horizontal***
 
-`   |   |   `
-`- - - - - - -`
-` X | X | X  `
-`- - - - - - -`
-`   |   |   ` 
+```text
+   |   |
+- - - - - - -
+ X | X | X  
+- - - - - - -
+   |   |           
+```
 
 ***Diagonal***
 
+```text
     |   | X
 - - - - - - -
     | X |    
 - - - - - - -
   X |   |
+```
 
 ***Vertical***
 
+```text
     | X |
 - - - - - - -
     | X |  
 - - - - - - -
     | X |
+```
 
 In the event of a tie where no more moves are possible, the users will be given the option to restart or exit the game.
-
