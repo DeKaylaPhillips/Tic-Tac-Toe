@@ -7,6 +7,7 @@ Simple command line application that allows two human players to compete in the 
 This game allows for two human players.
 
 PLAYER 1 = X
+
 PLAYER 2 = O
 
 You will be given a board with three columns and three rows.
@@ -22,11 +23,11 @@ The winning player will have adjacently aligned three of their designated marker
 ***Horizontal***
 
 ```text
-   |   |
+    |   |
 - - - - - - -
- X | X | X  
+  X | X | X  
 - - - - - - -
-   |   |           
+    |   |           
 ```
 
 ***Diagonal***
