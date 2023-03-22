@@ -1,3 +1,5 @@
+// NOTE: THIS IS A WALKING SKELETON DRAFT.
+
 // user instructions on startup
 console.log(
 '\nWELCOME TO THE GAME OF TIC-TAC-TOE!\n',
@@ -56,7 +58,17 @@ let positions = {
     C3: {position: board[2][2], active: false},
 }
 
+// hard-coded function to handle user input and display the updated board
 
+const update_board = (selection) => {
+    /* create functionality here to:
+        > add a user's marker to the board in the selected position
+        > handle cases when a position on the board is occupied i.e. not an empty string
+        > handle cases when no more positions are available/there are no more winning moves 
+        > identify a winning player
+    */
+}
+update_board('A1')
 
 
 
