@@ -21,11 +21,11 @@ The winning player will have adjacently aligned three of their designated marker
 
 ***Horizontal***
 
-    |   |
-- - - - - - -
-  X | X | X  
-- - - - - - -
-    |   |
+`   |   |   `
+`- - - - - - -`
+` X | X | X  `
+`- - - - - - -`
+`   |   |   ` 
 
 ***Diagonal***
 
