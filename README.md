@@ -54,12 +54,14 @@ In the event of a tie where no more moves are possible, the users will be given 
 
 ## SETUP/INSTALLATIONS
 
-Users must have:
-
 - Node Version: v18.15.0
+- npm Version: 9.5.0
+- Jest Version: 29.5.0 (should be pre-installed as a devDependency in package.json file)
 
 ## USAGE
 
 To play the game, run the command:
+`node Game.js`
 
-`$ node Game.js`
+To run the tests, run the command:
+`npm test
