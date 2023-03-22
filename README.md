@@ -50,3 +50,15 @@ The winning player will have adjacently aligned three of their designated marker
 ```
 
 In the event of a tie where no more moves are possible, the users will be given the option to restart or exit the game.
+
+## SETUP/INSTALLATIONS
+
+Users must have:
+
+- Node Version: v18.15.0
+
+## USAGE
+
+To play the game, run the command:
+
+`$ node Game.js`
