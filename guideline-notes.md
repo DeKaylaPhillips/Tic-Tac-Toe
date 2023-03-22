@@ -48,8 +48,7 @@ The Tic-Tac-Toe game should have:
 
 *instructed not to do these yet!*
 
-- one passing test 
+- one passing test
 - detailed README
 - continuous integration service for test suite
 - startup message printed to console
-
