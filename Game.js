@@ -2,11 +2,17 @@ module.exports = {
     displaySingleRow: () => { return "  |  |  " },
     
     displayThreeRows: () => { 
-        let row1 = "  |  |  ";
-        let row2 = "  |  |  ";
-        let row3 = "  |  |  ";
-        const allRows = `${row1}\n${row2}\n${row3}`;
+        let row = "  |  |  ";
+        const allRows = `${row}\n${row}\n${row}`;
         return allRows; 
-    }     
+    },
+
+    displaySeparatedRows: () => {
+        let row = "    |   |    "
+        let dashes = "- - - - - - -"
+        const board = `${row}\n${dashes}\n${row}\n${dashes}\n${row}`
+        return board
+    }  
 }
+
 
