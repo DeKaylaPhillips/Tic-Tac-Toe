@@ -64,4 +64,4 @@ To play the game, run the command:
 `node Game.js`
 
 To run the tests, run the command:
-`npm test
+`npm test`
