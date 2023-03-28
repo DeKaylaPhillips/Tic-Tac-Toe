@@ -9,9 +9,6 @@
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/"
-    ],
-    "moduleFileExtensions": [
-      "*.test.js", "js", "mjs", "cjs", "jsx", "ts", "tsx", "json", "node"
     ]
   },
   "dependencies": {
