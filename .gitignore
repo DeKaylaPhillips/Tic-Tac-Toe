@@ -1,2 +1,3 @@
-node_modules
+./node_modules
 guideline-notes.md
+.DS_store
