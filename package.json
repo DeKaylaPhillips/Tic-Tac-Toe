@@ -9,9 +9,13 @@
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/"
+    ],
+    "moduleDirectories": [
+      "node_modules"
     ]
   },
   "dependencies": {
     "babel-jest": "^29.5.0"
-  }
+  },
+  "type": "module"
 }
