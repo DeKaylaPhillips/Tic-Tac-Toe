@@ -4,7 +4,6 @@ import { Game } from './Game'
 
 describe('display a single row', () => {
     test('when the displaySingleRow function is called, the console will display a single row correctly', () => {
-        // ES6 Syntax
         const game = new Game(1)
         const row = "    |   |    \n"
 
@@ -15,7 +14,7 @@ describe('display a single row', () => {
 });
 
 describe('display all three rows', () => {
-    test('when the displayThreeRows function is called, the console will display three stacked rows correctly', () => {
+    test('when the threeRows function is called, the console will display three stacked rows correctly', () => {
         const game = new Game();
         const row = "    |   |    \n"
         const rows =  `${row}${row}${row}`
@@ -27,7 +26,7 @@ describe('display all three rows', () => {
 }) 
 
 describe('display rows separated by dashes', () => {
-    test('when the displaySeparatedRows function is called, the console will display three stacked rows separated by dashes correctly', () => {
+    test('when the rowsWithDashes function is called, the console will display three stacked rows separated by dashes correctly', () => {
         const game = new Game()
         const row = "    |   |    \n"
         const dashes = "- - - - - - -\n"
