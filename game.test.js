@@ -22,8 +22,8 @@ describe('display all three rows', () => {
         const threeRows = game.getRows("");
         
         expect(threeRows).toBe(rows)
-    })
-}) 
+    });
+});
 
 describe('display rows separated by dashes', () => {
     test('when the rowsWithDashes function is called, the console will display three stacked rows separated by dashes correctly', () => {
@@ -35,5 +35,19 @@ describe('display rows separated by dashes', () => {
         const rowsWithDashes = game.getRows();
             
         expect(rowsWithDashes).toBe(board)
-    })
-})
+    });
+});
+
+describe('tic-tac-toe board', () => {
+    test("has a structure that can accept and store values", () => {
+        const game = new Game()
+        const cells = new Array(9).fill('')
+        const line = game.line
+        const expectedBoard = `  ${cells[0]}  |  ${cells[1]}  |  ${cells[2]}  \n${line}\n  ${cells[3]}  |  ${cells[4]}  |  ${cells[5]}  \n${line}\n  ${cells[6]}  |  ${cells[7]}  |  ${cells[8]}  `
+
+        const board = game.getBoard();
+
+        expect(board).toStrictEqual(expectedBoard);
+    });
+});
+
