@@ -22,10 +22,9 @@ export class BoardPrinter extends BoardAssembly { // printing logic that inherit
        return `  ${this.cells[0]}  |  ${this.cells[1]}  |  ${this.cells[2]}  \n${this.line}\n  ${this.cells[3]}  |  ${this.cells[4]}  |  ${this.cells[5]}  \n${this.line}\n  ${this.cells[6]}  |  ${this.cells[7]}  |  ${this.cells[8]}  `;
     }
 }
-export class BoardPersistance extends BoardAssembly { // persistance logic
+export class BoardPersistence extends BoardAssembly { // persistance logic
     constructor(rows=3) {
         super(rows=3)
-
         this.cellCombinations = {
             'A1': { 'position': this.cells[0], 'occupied': false },
             'A2': { 'position': this.cells[1], 'occupied': false },
@@ -38,7 +37,16 @@ export class BoardPersistance extends BoardAssembly { // persistance logic
             'C3': { 'position': this.cells[8], 'occupied': false },
         };
     };
+
+    search(selectedCell) {
+        return this.cellCombinations[selectedCell] ? this.cellCombinations[selectedCell] : false; 
+    };
 };
+
+const board = new BoardPersistence()
+console.log(board.search('A1'))
+
+
 // export class BoardUpdate {
 //     constructor() {}
 
