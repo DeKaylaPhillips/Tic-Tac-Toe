@@ -67,12 +67,21 @@ describe('Board Persistence', () => {
 });
 
 describe('Board Persistence', () => {
-    test("will return a data structure containing information about a cell when a valid cell combination is passed to the search() method", () => {
+    test("will return a data structure containing information about a cell only when a valid cell combination is passed to the search() method", () => {
         const board = new BoardPersistence()
         
-        const cellData = board.search('A3')
+        // valid selections
+        const results1 = board.search('A3')
 
-        expect(cellData).toStrictEqual({ 'marker': '' , 'occupied': false, 'position': 2 })   
+        // invalid selections
+        const results2 = board.search('')
+        const results3 = board.search()
+        const results4 = board.search('D2')
+
+        expect(results1).toStrictEqual({ 'marker': '' , 'occupied': false, 'position': 2 })  
+        expect(results2).toBeFalsy()
+        expect(results3).toBeFalsy()
+        expect(results4).toBeFalsy()
     });
 });
 
