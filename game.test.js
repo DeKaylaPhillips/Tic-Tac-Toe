@@ -1,10 +1,10 @@
 // To run tests --> $ npm test
 
-import { Board } from './Game'
+import { BoardAssembly, BoardPersistance, BoardPrinter } from './Game'
 
-describe('display a single row', () => {
-    test('when the displaySingleRow function is called, the console will display a single row correctly', () => {
-        const board = new Board(1)
+describe('Board Assembly', () => {
+    test('will display 1 row when the class is instantiated with 1 as an arg, and when getRows() method is called with no args', () => {
+        const board = new BoardAssembly(1)
         const row = "    |   |    \n"
 
         const displaySingleRow = board.getRows("")
@@ -13,10 +13,10 @@ describe('display a single row', () => {
     });
 });
 
-describe('display all three rows', () => {
-    test('when the threeRows function is called, the console will display three stacked rows correctly', () => {
-        const board = new Board();
-        const row = "    |   |    \n"
+describe('Board Assembly', () => {
+    test('will display 3 stacked rows without lines when the class is instantiated with no args and the getRows() method is called with an empty space as an arg', () => {
+        const board = new BoardAssembly();
+        const row = `${board.row}\n`
         const rows =  `${row}${row}${row}`
         
         const threeRows = board.getRows("");
@@ -25,29 +25,56 @@ describe('display all three rows', () => {
     });
 });
 
-describe('display rows separated by dashes', () => {
-    test('when the rowsWithDashes function is called, the console will display three stacked rows separated by dashes correctly', () => {
-        const board = new Board()
-        const row = "    |   |    \n"
-        const dashes = "- - - - - - -\n"
-        const rows_dashes = `${row}${dashes}${row}${dashes}${row}`
+describe('Board Assembly', () => {
+    test('will display 3 stacked rows separated by 2 dashed lines when the class is instantiated with no args and the getRows() method is called without an argument', () => {
+        const board = new BoardAssembly()
+        const row = `${board.row}\n`
+        const line = `${board.line}\n`
+        const rowsAndLines = `${row}${line}${row}${line}${row}`
 
-        const rowsWithDashes = board.getRows();
+        const rowsWithline = board.getRows();
             
-        expect(rowsWithDashes).toBe(rows_dashes)
+        expect(rowsWithline).toBe(rowsAndLines)
     });
 });
 
-describe('tic-tac-toe board', () => {
-    test("has a structure that can accept and store values", () => {
-        const board = new Board()
-        const cells = new Array(9).fill('')
+describe('Board Printer', () => {
+    test("will return a display of a board to the console containing cell values that are able to be manipulated when the print() method is called", () => {
+        const board = new BoardPrinter()
+        const cells = board.cells
         const line = board.line
         const expectedBoard = `  ${cells[0]}  |  ${cells[1]}  |  ${cells[2]}  \n${line}\n  ${cells[3]}  |  ${cells[4]}  |  ${cells[5]}  \n${line}\n  ${cells[6]}  |  ${cells[7]}  |  ${cells[8]}  `
 
-        const displayBoard = board.printBoard();
+        const displayBoard = board.print();
 
         expect(displayBoard).toStrictEqual(expectedBoard);
     });
 });
+
+describe('Board Persistance', () => {
+    test("contains a data structure that will allow row/column combinations and their data to be accessed when a valid cell is selected on the board", () => {
+        const board = new BoardPersistance()
+        const cells = board.cellCombinations
+        const validCell = 'A3'
+        const invalidCell = 'D4'
+
+        const results1 = cells[validCell] ? true : false
+        const results2 = cells[invalidCell] ? true : false
+
+        expect(results1).toBeTruthy()
+        expect(results2).toBeFalsy()
+    });
+});
+
+describe('Board Persistance', () => {
+    test("will return an object containing data about a cell's position in the cell array, and a cell's occupancy status", () => {
+        const board = new BoardPersistance('A3')
+        
+        const cellData = board.searchCells()
+
+        expect(cellData).toBe({'position': this.cells[2] , 'occupied': false})
+        
+    })
+})
+
 
