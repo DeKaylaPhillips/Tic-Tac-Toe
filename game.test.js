@@ -1,6 +1,6 @@
 // To run tests --> $ npm test
 
-import { BoardAssembly, BoardPersistance, BoardPrinter } from './Game'
+import { BoardAssembly, BoardPersistence, BoardPrinter } from './Game'
 
 describe('Board Assembly', () => {
     test('will display 1 row when the class is instantiated with 1 as an arg, and when getRows() method is called with no args', () => {
@@ -51,9 +51,9 @@ describe('Board Printer', () => {
     });
 });
 
-describe('Board Persistance', () => {
+describe('Board Persistence', () => {
     test("contains a data structure that will allow row/column combinations and their data to be accessed when a valid cell is selected on the board", () => {
-        const board = new BoardPersistance()
+        const board = new BoardPersistence()
         const cells = board.cellCombinations
         const validCell = 'A3'
         const invalidCell = 'D4'
@@ -66,13 +66,13 @@ describe('Board Persistance', () => {
     });
 });
 
-describe('Board Persistance', () => {
-    test("will return an object containing data about a cell's position in the cell array, and a cell's occupancy status", () => {
-        const board = new BoardPersistance('A3')
+describe('Board Persistence', () => {
+    test("will return a data structure containing information about a cell when a valid cell combination is passed to the search() method", () => {
+        const board = new BoardPersistence()
         
-        const cellData = board.searchCells()
+        const cellData = board.search('A3')
 
-        expect(cellData).toBe({'position': this.cells[2] , 'occupied': false})   
+        expect(cellData).toStrictEqual({ 'position': '' , 'occupied': false })   
     });
 });
 
