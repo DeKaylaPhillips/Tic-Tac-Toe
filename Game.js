@@ -26,15 +26,15 @@ export class BoardPersistence extends BoardAssembly { // persistance logic
     constructor(rows=3) {
         super(rows=3)
         this.cellCombinations = {
-            'A1': { 'position': this.cells[0], 'occupied': false },
-            'A2': { 'position': this.cells[1], 'occupied': false },
-            'A3': { 'position': this.cells[2], 'occupied': false },
-            'B1': { 'position': this.cells[3], 'occupied': false },
-            'B2': { 'position': this.cells[4], 'occupied': false },
-            'B3': { 'position': this.cells[5], 'occupied': false },
-            'C1': { 'position': this.cells[6], 'occupied': false },
-            'C2': { 'position': this.cells[7], 'occupied': false },
-            'C3': { 'position': this.cells[8], 'occupied': false },
+            'A1': { 'marker': this.cells[0], 'occupied': false, 'position': 0 },
+            'A2': { 'marker': this.cells[1], 'occupied': false, 'position': 1 },
+            'A3': { 'marker': this.cells[2], 'occupied': false, 'position': 2 },
+            'B1': { 'marker': this.cells[3], 'occupied': false, 'position': 3 },
+            'B2': { 'marker': this.cells[4], 'occupied': false, 'position': 4 },
+            'B3': { 'marker': this.cells[5], 'occupied': false, 'position': 5 },
+            'C1': { 'marker': this.cells[6], 'occupied': false, 'position': 6 },
+            'C2': { 'marker': this.cells[7], 'occupied': false, 'position': 7 },
+            'C3': { 'marker': this.cells[8], 'occupied': false, 'position': 8 },
         };
     };
 
@@ -44,7 +44,13 @@ export class BoardPersistence extends BoardAssembly { // persistance logic
 };
 
 const board = new BoardPersistence()
+
+const selection = 'A1'
+console.log(board.cellCombinations[selection].marker) // to access the marker at the cell
+console.log(board.cellCombinations[selection].position) // to access the index of the cell in the array
+console.log(board.cellCombinations[selection].occupied) // to access occupancy status
 console.log(board.search('A1'))
+
 
 
 // export class BoardUpdate {

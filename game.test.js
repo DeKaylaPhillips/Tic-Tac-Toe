@@ -72,7 +72,7 @@ describe('Board Persistence', () => {
         
         const cellData = board.search('A3')
 
-        expect(cellData).toStrictEqual({ 'position': '' , 'occupied': false })   
+        expect(cellData).toStrictEqual({ 'marker': '' , 'occupied': false, 'position': 2 })   
     });
 });
 
