@@ -1,30 +1,30 @@
 export class BoardAssembly { // business logic
-    constructor(rows=3) {
+    constructor(rows = 3) {
         this.rowTotal = rows;
         this.row = "    |   |    ";
-        this.line = "- - - - - - -"; 
+        this.line = "- - - - - - -";
         this.cells = new Array(9).fill('');
-    }
+    };
 
-    getRows(divider) { 
+    getRows(divider) {
         const lineSeparator = (divider === undefined) ? `${this.line}\n` : divider;
         const arrayOfRows = new Array(this.rowTotal).fill(`${this.row}\n`);
         return arrayOfRows.join(lineSeparator);
-    }
-}
+    };
+};
 
 export class BoardPrinter extends BoardAssembly { // printing logic that inherits the cells from the board assembly class
-    constructor(rows=3) {
-        super(rows=3);
-    }
+    constructor(rows = 3) {
+        super(rows = 3);
+    };
 
-    print() { 
-       return `  ${this.cells[0]}  |  ${this.cells[1]}  |  ${this.cells[2]}  \n${this.line}\n  ${this.cells[3]}  |  ${this.cells[4]}  |  ${this.cells[5]}  \n${this.line}\n  ${this.cells[6]}  |  ${this.cells[7]}  |  ${this.cells[8]}  `;
-    }
+    print() {
+        return `  ${this.cells[0]}  |  ${this.cells[1]}  |  ${this.cells[2]}  \n${this.line}\n  ${this.cells[3]}  |  ${this.cells[4]}  |  ${this.cells[5]}  \n${this.line}\n  ${this.cells[6]}  |  ${this.cells[7]}  |  ${this.cells[8]}  `;
+    };
 }
 export class BoardPersistence extends BoardAssembly { // persistance logic
-    constructor(rows=3) {
-        super(rows=3)
+    constructor(rows = 3) {
+        super(rows = 3)
         this.cellCombinations = {
             'A1': { 'marker': this.cells[0], 'occupied': false, 'position': 0 },
             'A2': { 'marker': this.cells[1], 'occupied': false, 'position': 1 },
@@ -39,27 +39,9 @@ export class BoardPersistence extends BoardAssembly { // persistance logic
     };
 
     search(selectedCell) {
-        return this.cellCombinations[selectedCell] ? this.cellCombinations[selectedCell] : false; 
+        return this.cellCombinations[selectedCell] ? this.cellCombinations[selectedCell] : false;
     };
 };
-
-const board = new BoardPersistence()
-
-const selection = 'A1'
-console.log(board.cellCombinations[selection].marker) // to access the marker at the cell
-console.log(board.cellCombinations[selection].position) // to access the index of the cell in the array
-console.log(board.cellCombinations[selection].occupied) // to access occupancy status
-console.log(board.search('A1'))
-
-
-
-// export class BoardUpdate {
-//     constructor() {}
-
-//     // class method
-//         // code to execute
-// }
-
 
 /* 
 Notes 4/3/23:
@@ -82,8 +64,6 @@ Ticket - Accept Token
         combination NOT containing EXACTLY 1 number equal to 1, 2, or 3 
         empty string --> '' (no input)
         occupied cell (occupied cells to be stored in some data structure and checked for cell vacancy)
-
-
 
 - how do you accept this input?
     - accept input as an argument to a function that updates the board and console message based on the validity of the input 

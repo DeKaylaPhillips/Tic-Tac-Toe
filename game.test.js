@@ -11,9 +11,7 @@ describe('Board Assembly', () => {
 
         expect(displaySingleRow).toBe(row)  
     });
-});
 
-describe('Board Assembly', () => {
     test('will display 3 stacked rows without lines when the class is instantiated with no args and the getRows() method is called with an empty space as an arg', () => {
         const board = new BoardAssembly();
         const row = `${board.row}\n`
@@ -23,9 +21,7 @@ describe('Board Assembly', () => {
         
         expect(threeRows).toBe(rows)
     });
-});
 
-describe('Board Assembly', () => {
     test('will display 3 stacked rows separated by 2 dashed lines when the class is instantiated with no args and the getRows() method is called without an argument', () => {
         const board = new BoardAssembly()
         const row = `${board.row}\n`
@@ -37,6 +33,7 @@ describe('Board Assembly', () => {
         expect(rowsWithline).toBe(rowsAndLines)
     });
 });
+
 
 describe('Board Printer', () => {
     test("will return a display of a board to the console containing cell values that are able to be manipulated when the print() method is called", () => {
@@ -64,10 +61,8 @@ describe('Board Persistence', () => {
         expect(results1).toBeTruthy()
         expect(results2).toBeFalsy()
     });
-});
 
-describe('Board Persistence', () => {
-    test("will return a data structure containing information about a cell only when a valid cell combination is passed to the search() method", () => {
+    test("will return a data structure containing information about a cell only if a valid cell combination is passed to the search() method", () => {
         const board = new BoardPersistence()
         
         // valid selections
@@ -84,5 +79,6 @@ describe('Board Persistence', () => {
         expect(results4).toBeFalsy()
     });
 });
+
 
 
