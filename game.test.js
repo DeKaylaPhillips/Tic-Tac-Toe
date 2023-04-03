@@ -72,9 +72,8 @@ describe('Board Persistance', () => {
         
         const cellData = board.searchCells()
 
-        expect(cellData).toBe({'position': this.cells[2] , 'occupied': false})
-        
-    })
-})
+        expect(cellData).toBe({'position': this.cells[2] , 'occupied': false})   
+    });
+});
 
 
