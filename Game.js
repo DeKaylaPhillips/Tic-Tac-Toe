@@ -66,14 +66,39 @@ export class BoardValidation extends BoardPersistence {
         const errorMessage2 = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is occupied by the opponent player.\n\nPlease select an unoccupied position in the board.\n`
         
         if (data && data.marker === '') {
-            // display the board 
+            // need to send cell data to be used to update the board
+            // essentially will return a display of the updated board, and then..
+            // instruct the next player to select a position on the board
+            // will eventually have to account for when to stop playing the game and selecting cells
             return data 
         } else if (!data) { 
-            // display the board
+            console.log(this.board.print())
             return errorMessage1
         }
-        // display the board
+        console.log(this.board.print())
         return errorMessage2 
     };
 };
 
+export class Player {
+    constructor() {
+        this.player1 = { 'marker': 'X', 'move': false }
+        this.player2 = { 'marker': 'O', 'move': false }
+
+        const validation = new BoardValidation()
+        this.validation = validation
+
+        const board = new BoardPrinter()
+        this.board = board
+    };
+    
+    selectCell(currentPlayer, cell) {
+        this.validation.validate(cell)
+        console.log(this.board.print())
+    }
+};
+
+const player = new Player()
+console.log(player.player1)
+console.log(player.player2)
+console.log(player.selectCell('player1', 'A2'))

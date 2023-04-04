@@ -1,6 +1,6 @@
 // To run tests --> $ npm test
 
-import { BoardAssembly, BoardPersistence, BoardPrinter, BoardValidation } from './Game'
+import { BoardAssembly, BoardPersistence, BoardPrinter, BoardValidation, Player } from './Game'
 
 describe('Board Assembly', () => {
     const board = new BoardAssembly()
@@ -125,13 +125,24 @@ describe('Player', () => {
     const player = new Player()
 
     test("will return an object containing data about a player's assigned marker and if that player can make moves when the getPlayer() method is called", () => {
+        
         const player1 = player.player1
         const player2 = player.player2
 
-        expect(player1).toStrictEqual({ 'player1': { 'marker': 'X', 'move': false } })
-        expect(player2).toStrictEqual({ 'player2': { 'marker': 'O', 'move': false } })
+        expect(player1).toStrictEqual({ 'marker': 'X', 'move': false })
+        expect(player2).toStrictEqual({ 'marker': 'O', 'move': false })
     });
-    
+
+    test("will allow a player to select a cell on the board and return an error message if an invalid row/col combination is selected when the selectCell() method is called", () => {
+        
+        const player1 = player.player1
+        const cell = 'A4'
+        const errorMessage = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n`
+
+        const results = player.selectCell(player1, cell)
+        
+        expect(results).toBe(errorMessage)
+    });
 })
 /*
 --> a method to validate a user's selected cell...
