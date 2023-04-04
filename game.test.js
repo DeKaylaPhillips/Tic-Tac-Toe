@@ -87,10 +87,10 @@ describe('Board Validation', () => {
         
         const results = board.validate(selection)
         
-        expect(results).toBe(`${selection} is not a valid position on the board.`)      
+        expect(results).toBe(`\n--- INVALID MOVE BY PLAYER ---\n\n'${selection}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n`)      
     });
     test("will return an object containing data about a selected cell if the cell is a valid row/col combination when the validate() method is called", () => {
-        
+
     })
 });
         /* 
