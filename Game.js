@@ -47,8 +47,8 @@ export class BoardPersistence extends BoardAssembly {
         };
     };
 
-    getCell(selectedCell) {
-        return this.cellCombinations[selectedCell] ? this.cellCombinations[selectedCell] : false;
+    getCell(cell) {
+        return this.cellCombinations[cell] ? this.cellCombinations[cell] : false;
     };
 };
 
@@ -60,18 +60,20 @@ export class BoardValidation extends BoardPersistence {
         this.board = board
     };
 
-    validate(selection) {
-        let data = this.getCell(selection)
+    validate(cell) {
+        let cellData = this.getCell(cell)
 
-        if (!data) {
+        if (!cellData) {
             return `\n--- INVALID MOVE BY PLAYER ---\n\n'${selection}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n`
-        } 
+        } else {
+            return cellData
+        }
     }
 }
 
 const board = new BoardValidation()
 console.log(board.validate('A5'))
-
+console.log(board.validate('A3'))
 /* 
 Notes 4/3/23:
 - separate the logic 
