@@ -121,8 +121,30 @@ describe('Board Validation', () => {
 });
         
        
+describe('Player', () => {
+    const player = new Player()
 
+    test("will return an object containing data about a player's assigned marker and if that player can make moves when the getPlayer() method is called", () => {
+        const player1 = player.player1
+        const player2 = player.player2
 
-
+        expect(player1).toStrictEqual({ 'player1': { 'marker': 'X', 'move': false } })
+        expect(player2).toStrictEqual({ 'player2': { 'marker': 'O', 'move': false } })
+    });
+    
+})
+/*
+--> a method to validate a user's selected cell...
+some [(data structure) to store each player's distinct marker symbol - 'X' or 'O']
+    - create a player class with attributes that set player1 to X and player 2 to O?
+    - data structure containing current moves = updated cell array
+    - initialize the value of current player to null
+    - the value of the current player will alternate between players as valid moves are made
+    - if the current player is player1, then that player sends their selected cell for validation in the validation class
+    - if the cell is validated and data is returned regarding the selected cell, 
+    - the cell object is sent to a method that updates the array --> this should in turn, update the boardpersistance class from the assembly class
+take the [player's symbol] if that [(player's move) is valid and available]
+using the data object from validation, reassign the index value in the cells array from an empty string to a player's marker symbol
+*/
 
 

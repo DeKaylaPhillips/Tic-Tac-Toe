@@ -30,7 +30,7 @@ export class BoardPrinter extends BoardAssembly {
     print() {
         return `  ${this.cells[0]}  |  ${this.cells[1]}  |  ${this.cells[2]}  \n${this.line}\n  ${this.cells[3]}  |  ${this.cells[4]}  |  ${this.cells[5]}  \n${this.line}\n  ${this.cells[6]}  |  ${this.cells[7]}  |  ${this.cells[8]}  `;
     };
-}
+};
 export class BoardPersistence extends BoardAssembly { 
     constructor() {
         super();
@@ -65,11 +65,15 @@ export class BoardValidation extends BoardPersistence {
         const errorMessage1 = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n` 
         const errorMessage2 = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is occupied by the opponent player.\n\nPlease select an unoccupied position in the board.\n`
         
-        if (data && data.marker === '') { 
+        if (data && data.marker === '') {
+            // display the board 
             return data 
         } else if (!data) { 
+            // display the board
             return errorMessage1
         }
+        // display the board
         return errorMessage2 
     };
 };
+
