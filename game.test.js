@@ -3,7 +3,10 @@
 import { BoardAssembly, BoardPersistence, BoardPrinter, BoardValidation } from './Game'
 
 describe('Board Assembly', () => {
+    const board = new BoardAssembly()
+    
     test('will display 1 row when the class is instantiated with 1 as an arg, and when getRows() method is called with no args', () => {
+        
         const board = new BoardAssembly(1)
         const row = `${board.row}\n`
 
@@ -13,7 +16,7 @@ describe('Board Assembly', () => {
     });
 
     test('will display 3 stacked rows without lines when the class is instantiated with no args and the getRows() method is called with an empty space as an arg', () => {
-        const board = new BoardAssembly()
+        
         const row = `${board.row}\n`
         const rows = `${row}${row}${row}`
 
@@ -23,7 +26,7 @@ describe('Board Assembly', () => {
     });
 
     test('will display 3 stacked rows separated by 2 dashed lines when the class is instantiated with no args and the getRows() method is called without an argument', () => {
-        const board = new BoardAssembly()
+        
         const row = `${board.row}\n`
         const line = `${board.line}\n`
         const rowsAndLines = `${row}${line}${row}${line}${row}`
@@ -36,8 +39,10 @@ describe('Board Assembly', () => {
 
 
 describe('Board Printer', () => {
+    const board = new BoardPrinter()
+
     test("will return a display of a board to the console containing cell values that are able to be manipulated when the print() method is called", () => {
-        const board = new BoardPrinter()
+        
         const cells = board.cells
         const line = board.line
         const expectedBoard = `  ${cells[0]}  |  ${cells[1]}  |  ${cells[2]}  \n${line}\n  ${cells[3]}  |  ${cells[4]}  |  ${cells[5]}  \n${line}\n  ${cells[6]}  |  ${cells[7]}  |  ${cells[8]}  `
@@ -49,8 +54,10 @@ describe('Board Printer', () => {
 });
 
 describe('Board Persistence', () => {
+    const board = new BoardPersistence()
+
     test("contains a data structure that will allow row/column combinations and their data to be accessed when a valid cell is selected on the board", () => {
-        const board = new BoardPersistence()
+        
         const cells = board.cellCombinations
         const validCell = 'A3'
         const invalidCell = 'D4'
@@ -63,12 +70,10 @@ describe('Board Persistence', () => {
     });
 
     test("will return a data structure containing information about a cell only if a valid cell combination is passed to the getCell() method", () => {
-        const board = new BoardPersistence()
-
-        // valid selections
+        
+        // valid cells
         const results1 = board.getCell('A3')
-
-        // invalid selections
+        // invalid cells
         const results2 = board.getCell('')
         const results3 = board.getCell()
         const results4 = board.getCell('D2')
@@ -81,16 +86,24 @@ describe('Board Persistence', () => {
 });
 
 describe('Board Validation', () => {
+    const board = new BoardValidation()
+    
     test("will return an error message if an invalid row/col combination is provided when the validate() method is called", () => {
-        const board = new BoardValidation()
-        let selection = 'A4'
         
-        const results = board.validate(selection)
-        
-        expect(results).toBe(`\n--- INVALID MOVE BY PLAYER ---\n\n'${selection}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n`)      
-    });
-    test("will return an object containing data about a selected cell if the cell is a valid row/col combination when the validate() method is called", () => {
+        let cell = 'A4'
 
+        const results = board.validate(cell)
+        
+        expect(results).toBe(`\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n`)      
+    });
+
+    test("will return an object containing data about a selected cell if the cell is a valid row/col combination when the validate() method is called", () => {
+        
+        let cell = 'A3'
+        
+        const results = board.validate(cell)
+
+        expect(results).toStrictEqual({ 'marker': '', 'occupied': false, 'position': 2 })
     })
 });
         /* 
@@ -107,8 +120,8 @@ describe('Board Validation', () => {
             else if...
             a player does not select a cell (an empty string or null value), then the board with no update will display to the console along with a string message instructing the current player to select a position using row/column combos format
         instantiate a class named BoardValidation
-        from the board validation class, create a validation method that will accept a user's selection as an argument
-        call the getCell method passed with user's selection from the persistence class to first determine if the cell selected is valid
+        from the board validation class, create a validation method that will accept a user's cell as an argument
+        call the getCell method passed with user's cell from the persistence class to first determine if the cell selected is valid
         pass the results of the getCell() method to back the validation method - 
             1. will either be a dictionary containing data about the cell's status and position
                 this means the spot is VALID - however, doesn't determine availability
