@@ -61,51 +61,15 @@ export class BoardValidation extends BoardPersistence {
     };
 
     validate(cell) {
-        let cellData = this.getCell(cell)
-        let errorMessage = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is not a valid and unoccupied row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n` 
-        return !cellData ? errorMessage : cellData
-
-    // if cellData comes through - determine if the spot is available or not;
-    // --> if spot available, ...
-
-    // --> if spot NOT available, ...
-    // instruct user to pick an unoccupied position on the board
-    }
-}
-
-const board = new BoardValidation()
-console.log(board.validate('A5'))
-console.log(board.validate('A3'))
-/* 
-Notes 4/3/23:
-- separate the logic 
-- refactor tests to accept new structure
-
-Ticket - Accept Token
-    goal: enter a token into TTT
-
-- what does the position look like as input?
-    - use rows and column combinations denoted with letters and numbers to identify and choose cells on the board
-    - use an object to store the cell combinations in the board to easily access and compare them to user input?
-
-- validation logic:
-    - rows denoted by letters - A, B, C (top to bottom)
-    - columns denoted by numbers - 1, 2, 3 (left to right)
-    - valid row/column combinations - A1, B3, C2
-    - invalid row/column combinations 
-        combination NOT containing EXACTLY 1 letter --> A, B, or C
-        combination NOT containing EXACTLY 1 number equal to 1, 2, or 3 
-        empty string --> '' (no input)
-        occupied cell (occupied cells to be stored in some data structure and checked for cell vacancy)
-
-- how do you accept this input?
-    - accept input as an argument to a function that updates the board and console message based on the validity of the input 
-
-technical:
-- user inputs position
-    if VALID and AVAILABLE --> print updated board to the console; instruct next user to play
-    if VALID and UNAVAILABLE --> print board without update and inform user the position chosen is occupied; try again
-    if INVALID --> error: inform user of format of the position is supposed to look like
-    if EMPTY STRING --> error: inform user of format of position is supposed to look like
-
-*/
+        const data = this.getCell(cell)
+        const errorMessage1 = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n` 
+        const errorMessage2 = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is occupied by the opponent player.\n\nPlease select an unoccupied position in the board.\n`
+        
+        if (data && data.marker === '') { 
+            return data 
+        } else if (!data) { 
+            return errorMessage1
+        }
+        return errorMessage2 
+    };
+};
