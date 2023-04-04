@@ -5,20 +5,20 @@ import { BoardAssembly, BoardPersistence, BoardPrinter } from './Game'
 describe('Board Assembly', () => {
     test('will display 1 row when the class is instantiated with 1 as an arg, and when getRows() method is called with no args', () => {
         const board = new BoardAssembly(1)
-        const row = "    |   |    \n"
+        const row = `${board.row}\n`
 
         const displaySingleRow = board.getRows("")
 
-        expect(displaySingleRow).toBe(row)  
+        expect(displaySingleRow).toBe(row)
     });
 
     test('will display 3 stacked rows without lines when the class is instantiated with no args and the getRows() method is called with an empty space as an arg', () => {
-        const board = new BoardAssembly();
+        const board = new BoardAssembly()
         const row = `${board.row}\n`
-        const rows =  `${row}${row}${row}`
-        
-        const threeRows = board.getRows("");
-        
+        const rows = `${row}${row}${row}`
+
+        const threeRows = board.getRows("")
+
         expect(threeRows).toBe(rows)
     });
 
@@ -28,8 +28,8 @@ describe('Board Assembly', () => {
         const line = `${board.line}\n`
         const rowsAndLines = `${row}${line}${row}${line}${row}`
 
-        const rowsWithline = board.getRows();
-            
+        const rowsWithline = board.getRows()
+
         expect(rowsWithline).toBe(rowsAndLines)
     });
 });
@@ -42,9 +42,9 @@ describe('Board Printer', () => {
         const line = board.line
         const expectedBoard = `  ${cells[0]}  |  ${cells[1]}  |  ${cells[2]}  \n${line}\n  ${cells[3]}  |  ${cells[4]}  |  ${cells[5]}  \n${line}\n  ${cells[6]}  |  ${cells[7]}  |  ${cells[8]}  `
 
-        const displayBoard = board.print();
+        const displayBoard = board.print()
 
-        expect(displayBoard).toStrictEqual(expectedBoard);
+        expect(displayBoard).toStrictEqual(expectedBoard)
     });
 });
 
@@ -62,18 +62,18 @@ describe('Board Persistence', () => {
         expect(results2).toBeFalsy()
     });
 
-    test("will return a data structure containing information about a cell only if a valid cell combination is passed to the search() method", () => {
+    test("will return a data structure containing information about a cell only if a valid cell combination is passed to the getCell() method", () => {
         const board = new BoardPersistence()
-        
+
         // valid selections
-        const results1 = board.search('A3')
+        const results1 = board.getCell('A3')
 
         // invalid selections
-        const results2 = board.search('')
-        const results3 = board.search()
-        const results4 = board.search('D2')
+        const results2 = board.getCell('')
+        const results3 = board.getCell()
+        const results4 = board.getCell('D2')
 
-        expect(results1).toStrictEqual({ 'marker': '' , 'occupied': false, 'position': 2 })  
+        expect(results1).toStrictEqual({ 'marker': '', 'occupied': false, 'position': 2 })
         expect(results2).toBeFalsy()
         expect(results3).toBeFalsy()
         expect(results4).toBeFalsy()

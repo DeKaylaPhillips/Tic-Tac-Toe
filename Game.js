@@ -1,4 +1,13 @@
-export class BoardAssembly { // business logic
+// TO-DO --> Determine if an update method is considered "business logic" or if it should exist within its own class
+// TO-DO --> Incorporate validity logic into the program as a separate class
+// TO-DO --> Create method that takes a selected token and returns a response to the console based on the validity of the input
+// whether or not the selection is valid will determine whether the method to update the board will be called
+// selection can be confirmed to exist by calling the search method in the persistence class which determines if a selected cell exists or not
+// selection can be confirmed valid by creating a method using validitity logic to manage the results from the search method 
+// will check if results confirm the selection exists (if a cell object is returned) or not (false is returned)
+// user will be prompted on how to proceed based on the results of their selection within the interface
+
+export class BoardAssembly { 
     constructor(rows = 3) {
         this.rowTotal = rows;
         this.row = "    |   |    ";
@@ -13,7 +22,7 @@ export class BoardAssembly { // business logic
     };
 };
 
-export class BoardPrinter extends BoardAssembly { // printing logic that inherits the cells from the board assembly class
+export class BoardPrinter extends BoardAssembly { 
     constructor(rows = 3) {
         super(rows = 3);
     };
@@ -22,7 +31,7 @@ export class BoardPrinter extends BoardAssembly { // printing logic that inherit
         return `  ${this.cells[0]}  |  ${this.cells[1]}  |  ${this.cells[2]}  \n${this.line}\n  ${this.cells[3]}  |  ${this.cells[4]}  |  ${this.cells[5]}  \n${this.line}\n  ${this.cells[6]}  |  ${this.cells[7]}  |  ${this.cells[8]}  `;
     };
 }
-export class BoardPersistence extends BoardAssembly { // persistance logic
+export class BoardPersistence extends BoardAssembly { 
     constructor(rows = 3) {
         super(rows = 3)
         this.cellCombinations = {
@@ -38,10 +47,11 @@ export class BoardPersistence extends BoardAssembly { // persistance logic
         };
     };
 
-    search(selectedCell) {
+    getCell(selectedCell) {
         return this.cellCombinations[selectedCell] ? this.cellCombinations[selectedCell] : false;
     };
 };
+
 
 /* 
 Notes 4/3/23:
