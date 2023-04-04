@@ -1,6 +1,6 @@
 // To run tests --> $ npm test
 
-import { BoardAssembly, BoardPersistence, BoardPrinter } from './Game'
+import { BoardAssembly, BoardPersistence, BoardPrinter, BoardValidation } from './Game'
 
 describe('Board Assembly', () => {
     test('will display 1 row when the class is instantiated with 1 as an arg, and when getRows() method is called with no args', () => {
@@ -79,6 +79,54 @@ describe('Board Persistence', () => {
         expect(results4).toBeFalsy()
     });
 });
+
+describe('Board Validation', () => {
+    test("will return an error message if an invalid row/col combination is provided when the validate() method is called", () => {
+        const board = new BoardValidation()
+        let selection = 'A4'
+        
+        const results = board.validate(selection)
+        
+        expect(results).toBe(`${selection} is not a valid position on the board.`)      
+    });
+    test("will return an object containing data about a selected cell if the cell is a valid row/col combination when the validate() method is called", () => {
+        
+    })
+});
+        /* 
+        BV class will be responsible for checking the validity of move made by a player
+        rules state:
+            if a player selects a cell that is a valid cell, and has no marker in its spot (it is available), then an updated board will display to the console along with a string message instructing the next player to select a cell in which to place their marker
+            
+            else if... (error handling)
+            a player selects a cell that is a valid cell, BUT has a marker in its spot (it is not available), then the board with no update will display to the console along with a string message instructing the current player to select another position to place their marker in the board
+            
+            else if...
+            a player selects a cell that is not a valid cell (possible typo or misunderstanding of row/column formatting rules), then the board with no update will display to the console along with a string message instructing the current player to select another position to place their marker in the board using the proper row/column combos
+
+            else if...
+            a player does not select a cell (an empty string or null value), then the board with no update will display to the console along with a string message instructing the current player to select a position using row/column combos format
+        instantiate a class named BoardValidation
+        from the board validation class, create a validation method that will accept a user's selection as an argument
+        call the getCell method passed with user's selection from the persistence class to first determine if the cell selected is valid
+        pass the results of the getCell() method to back the validation method - 
+            1. will either be a dictionary containing data about the cell's status and position
+                this means the spot is VALID - however, doesn't determine availability
+                    check availability by determining whetheror not the marker key in the board has the value of an empty string
+                    if the value of the marker key is not an empty string - the spot is occupied
+                        log the display of the current board to the console
+                        display an error message intructing the current player to select an unoccupied cell on the board (and possible a data structure with the unoccupied row/col combinations)
+                    else if the value of the marker key is an empty string
+                        the spot on the board is both VALID and UNOCCUPIED meaning the board is to be updated
+
+            
+            2. "false" - meaning the selected position is not a valid position on the board
+                log the display of the current board to the console
+                display error message instructing current player to provide a valid row/col combination on the board w/ an example
+        */
+       
+
+
 
 
 

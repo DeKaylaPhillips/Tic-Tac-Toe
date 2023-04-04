@@ -23,8 +23,8 @@ export class BoardAssembly {
 };
 
 export class BoardPrinter extends BoardAssembly { 
-    constructor(rows = 3) {
-        super(rows = 3);
+    constructor() {
+        super();
     };
 
     print() {
@@ -32,8 +32,8 @@ export class BoardPrinter extends BoardAssembly {
     };
 }
 export class BoardPersistence extends BoardAssembly { 
-    constructor(rows = 3) {
-        super(rows = 3)
+    constructor() {
+        super();
         this.cellCombinations = {
             'A1': { 'marker': this.cells[0], 'occupied': false, 'position': 0 },
             'A2': { 'marker': this.cells[1], 'occupied': false, 'position': 1 },
@@ -52,7 +52,11 @@ export class BoardPersistence extends BoardAssembly {
     };
 };
 
-
+export class BoardValidation extends BoardPersistence {
+    constructor() {
+        super();
+    }
+}
 /* 
 Notes 4/3/23:
 - separate the logic 
@@ -84,5 +88,5 @@ technical:
     if VALID and UNAVAILABLE --> print board without update and inform user the position chosen is occupied; try again
     if INVALID --> error: inform user of format of the position is supposed to look like
     if EMPTY STRING --> error: inform user of format of position is supposed to look like
-    
+
 */
