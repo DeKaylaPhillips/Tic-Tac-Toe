@@ -68,6 +68,8 @@ export class BoardValidation extends BoardPersistence {
         } else {
             return cellData
         }
+
+        
     }
 }
 
