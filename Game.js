@@ -93,8 +93,7 @@ export class Player {
     };
     
     selectCell(currentPlayer, cell) {
-        this.validation.validate(cell)
-        console.log(this.board.print())
+        return this.validation.validate(cell)
     }
 };
 
