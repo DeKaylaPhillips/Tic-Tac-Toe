@@ -1,18 +1,11 @@
-// TO-DO --> Determine if an update method is considered "business logic" or if it should exist within its own class
-// TO-DO --> Incorporate validity logic into the program as a separate class
-// TO-DO --> Create method that takes a selected token and returns a response to the console based on the validity of the input
-// whether or not the selection is valid will determine whether the method to update the board will be called
-// selection can be confirmed to exist by calling the search method in the persistence class which determines if a selected cell exists or not
-// selection can be confirmed valid by creating a method using validitity logic to manage the results from the search method 
-// will check if results confirm the selection exists (if a cell object is returned) or not (false is returned)
-// user will be prompted on how to proceed based on the results of their selection within the interface
+export class BoardAssembly {
 
-export class BoardAssembly { 
+    static cells = new Array(9).fill(''); // make cells a static property of the BoardAssembly class
+
     constructor(rows = 3) {
         this.rowTotal = rows;
         this.row = "    |   |    ";
         this.line = "- - - - - - -";
-        this.cells = new Array(9).fill('');
     };
 
     getRows(divider) {
@@ -28,23 +21,26 @@ export class BoardPrinter extends BoardAssembly {
     };
 
     print() {
-        return `  ${this.cells[0]}  |  ${this.cells[1]}  |  ${this.cells[2]}  \n${this.line}\n  ${this.cells[3]}  |  ${this.cells[4]}  |  ${this.cells[5]}  \n${this.line}\n  ${this.cells[6]}  |  ${this.cells[7]}  |  ${this.cells[8]}  `;
+        return `  ${BoardAssembly.cells[0]}  |  ${BoardAssembly.cells[1]}  |  ${BoardAssembly.cells[2]}  \n${this.line}\n  ${BoardAssembly.cells[3]}  |  ${BoardAssembly.cells[4]}  |  ${BoardAssembly.cells[5]}  \n${this.line}\n  ${BoardAssembly.cells[6]}  |  ${BoardAssembly.cells[7]}  |  ${BoardAssembly.cells[8]}  `;
     };
 };
 export class BoardPersistence extends BoardAssembly { 
     constructor() {
         super();
         this.cellCombinations = {
-            'A1': { 'marker': this.cells[0], 'occupied': false, 'position': 0 },
-            'A2': { 'marker': this.cells[1], 'occupied': false, 'position': 1 },
-            'A3': { 'marker': this.cells[2], 'occupied': false, 'position': 2 },
-            'B1': { 'marker': this.cells[3], 'occupied': false, 'position': 3 },
-            'B2': { 'marker': this.cells[4], 'occupied': false, 'position': 4 },
-            'B3': { 'marker': this.cells[5], 'occupied': false, 'position': 5 },
-            'C1': { 'marker': this.cells[6], 'occupied': false, 'position': 6 },
-            'C2': { 'marker': this.cells[7], 'occupied': false, 'position': 7 },
-            'C3': { 'marker': this.cells[8], 'occupied': false, 'position': 8 },
-        };       
+            'A1': { 'marker': BoardAssembly.cells[0], 'occupied': false, 'position': 0 },
+            'A2': { 'marker': BoardAssembly.cells[1], 'occupied': false, 'position': 1 },
+            'A3': { 'marker': BoardAssembly.cells[2], 'occupied': false, 'position': 2 },
+            'B1': { 'marker': BoardAssembly.cells[3], 'occupied': false, 'position': 3 },
+            'B2': { 'marker': BoardAssembly.cells[4], 'occupied': false, 'position': 4 },
+            'B3': { 'marker': BoardAssembly.cells[5], 'occupied': false, 'position': 5 },
+            'C1': { 'marker': BoardAssembly.cells[6], 'occupied': false, 'position': 6 },
+            'C2': { 'marker': BoardAssembly.cells[7], 'occupied': false, 'position': 7 },
+            'C3': { 'marker': BoardAssembly.cells[8], 'occupied': false, 'position': 8 },
+        };  
+        
+        let printer = new BoardPrinter()
+        this.printer = printer;
     };
 
     getCell(cell) {
@@ -56,8 +52,9 @@ export class BoardPersistence extends BoardAssembly {
         let position = this.cellCombinations[cell].position
         this.cellCombinations[cell].marker = playerMarker
         this.cellCombinations[cell].occupied = true 
-        this.cells[position] = playerMarker  // update the selected position in the cells array to update the board with the new token        
-        console.log(this.cells)
+        BoardAssembly.cells[position] = playerMarker  
+        
+        console.log(this.printer.print())
         return this.cellCombinations[cell]
     };
 };
@@ -66,8 +63,8 @@ export class BoardValidation extends BoardPersistence {
     constructor() {
         super();
 
-        const board = new BoardPrinter()
-        this.board = board
+        const printer = new BoardPrinter()
+        this.printer = printer
     };
 
     validate(cell) {
@@ -82,10 +79,10 @@ export class BoardValidation extends BoardPersistence {
             // will eventually have to account for when to stop playing the game and selecting cells
             return data 
         } else if (!data) { 
-            console.log(this.board.print())
+            console.log(this.printer.print())
             return errorMessage1
         }
-        console.log(this.board.print())
+        console.log(this.printer.print())
         return errorMessage2 
     };
 };
@@ -95,19 +92,20 @@ export class Player {
         this.player1 = { 'marker': 'X', 'move': false }
         this.player2 = { 'marker': 'O', 'move': false }
 
-        const validation = new BoardValidation()
-        this.validation = validation
+        const validator = new BoardValidation()
+        this.validator = validator
 
-        const board = new BoardPrinter()
-        this.board = board
+        const printer = new BoardPrinter()
+        this.printer = printer
     };
     
     selectCell(currentPlayer, cell) {
-        return this.validation.validate(cell)
+        return this.validator.validate(cell)
     }
 };
 
-const persistence = new BoardPersistence()
-console.log(persistence.getUpdate('X', 'A1'))
+const board = new BoardPersistence()
+console.log(board.getUpdate('X', 'A2'))
+console.log(board.getUpdate('O'))
 
 
