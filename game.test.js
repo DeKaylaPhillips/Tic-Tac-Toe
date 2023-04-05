@@ -152,7 +152,7 @@ describe('Player', () => {
 
         const results = player.selectCell(player2, cell)
 
-        expect(results).toBe(data)
+        expect(results).toStrictEqual(data)
     });
 });
 /*
