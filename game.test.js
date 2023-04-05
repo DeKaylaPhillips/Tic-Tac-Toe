@@ -142,10 +142,19 @@ describe('Player', () => {
         const results = player.selectCell(player1, cell)
         
         expect(results).toBe(errorMessage)
-    });
+    });   
 
-    
-})
+    test("will allow a player to select a cell on the board and return an object containing data about the cell if a valid, unoccupied row/col combination is selected when the selectCell() method is called", () => {
+
+        const player2 = player.player2
+        const cell = 'A1'
+        const data = { 'marker':'', 'occupied': false, 'position': 0 }
+
+        const results = player.selectCell(player2, cell)
+
+        expect(results).toBe(data)
+    })
+});
 /*
 --> a method to validate a user's selected cell...
 some [(data structure) to store each player's distinct marker symbol - 'X' or 'O']
