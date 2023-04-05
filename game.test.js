@@ -43,7 +43,7 @@ describe('Board Printer', () => {
 
     test("will return a display of a board to the console containing cell values that are able to be manipulated when the print() method is called", () => {
         
-        const cells = board.cells
+        const cells = BoardAssembly.cells
         const line = board.line
         const expectedBoard = `  ${cells[0]}  |  ${cells[1]}  |  ${cells[2]}  \n${line}\n  ${cells[3]}  |  ${cells[4]}  |  ${cells[5]}  \n${line}\n  ${cells[6]}  |  ${cells[7]}  |  ${cells[8]}  `
 
@@ -86,11 +86,12 @@ describe('Board Persistence', () => {
 
     test("will update the data for a cell selected by a player when the getUpdate() method is called", () => {
        
-        let marker = 'X'
-        let cell = 'A1'
+        const marker = 'X'
+        const cell = 'A1'
+        
 
         const results = board.getUpdate(marker, cell)
-        
+
         expect(results).toStrictEqual({ 'marker': 'X', 'occupied': true, 'position': 0 })
     });
 });
