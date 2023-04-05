@@ -50,6 +50,10 @@ export class BoardPersistence extends BoardAssembly {
     getCell(cell) {
         return this.cellCombinations[cell] ? this.cellCombinations[cell] : false;
     };
+
+    // getUpdate(playerMarker, cell, position) {
+
+    // };
 };
 
 export class BoardValidation extends BoardPersistence {

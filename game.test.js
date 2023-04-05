@@ -83,6 +83,17 @@ describe('Board Persistence', () => {
         expect(results3).toBeFalsy()
         expect(results4).toBeFalsy()
     });
+
+    test("will update the data for a cell selected by a player when the getUpdate() method is called", () => {
+        const player = new Player()
+        let marker = player.player1.marker
+        let cell = 'A1'
+        let position = 0
+
+        const results = board.getUpdate(marker, cell, position)
+        
+        expect(results).toStrictEqual({ 'marker': 'X', 'occupied': true, 'position': 0 })
+    });
 });
 
 describe('Board Validation', () => {
