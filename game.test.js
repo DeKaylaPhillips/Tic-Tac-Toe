@@ -85,12 +85,11 @@ describe('Board Persistence', () => {
     });
 
     test("will update the data for a cell selected by a player when the getUpdate() method is called", () => {
-        const player = new Player()
-        let marker = player.player1.marker
+       
+        let marker = 'X'
         let cell = 'A1'
-        let position = 0
 
-        const results = board.getUpdate(marker, cell, position)
+        const results = board.getUpdate(marker, cell)
         
         expect(results).toStrictEqual({ 'marker': 'X', 'occupied': true, 'position': 0 })
     });

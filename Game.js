@@ -44,16 +44,22 @@ export class BoardPersistence extends BoardAssembly {
             'C1': { 'marker': this.cells[6], 'occupied': false, 'position': 6 },
             'C2': { 'marker': this.cells[7], 'occupied': false, 'position': 7 },
             'C3': { 'marker': this.cells[8], 'occupied': false, 'position': 8 },
-        };
+        };       
     };
 
     getCell(cell) {
         return this.cellCombinations[cell] ? this.cellCombinations[cell] : false;
     };
 
-    // getUpdate(playerMarker, cell, position) {
-
-    // };
+    getUpdate(playerMarker, cell) {
+       
+        let position = this.cellCombinations[cell].position
+        this.cellCombinations[cell].marker = playerMarker
+        this.cellCombinations[cell].occupied = true 
+        this.cells[position] = playerMarker  // update the selected position in the cells array to update the board with the new token        
+        console.log(this.cells)
+        return this.cellCombinations[cell]
+    };
 };
 
 export class BoardValidation extends BoardPersistence {
@@ -101,7 +107,7 @@ export class Player {
     }
 };
 
-const player = new Player()
-console.log(player.player1)
-console.log(player.player2)
-console.log(player.selectCell('player1', 'A2'))
+const persistence = new BoardPersistence()
+console.log(persistence.getUpdate('X', 'A1'))
+
+
