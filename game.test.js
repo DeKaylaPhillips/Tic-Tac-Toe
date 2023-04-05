@@ -153,7 +153,7 @@ describe('Player', () => {
         const results = player.selectCell(player2, cell)
 
         expect(results).toBe(data)
-    })
+    });
 });
 /*
 --> a method to validate a user's selected cell...
