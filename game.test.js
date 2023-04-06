@@ -85,14 +85,15 @@ describe('Board Persistence', () => {
     });
 
     test("will update the data for a cell selected by a player when the getUpdate() method is called", () => {
-       
         const marker = 'X'
         const cell = 'A1'
-        
+    
+        board.getUpdate(marker, cell)
+        const results1 = board.cellCombinations[cell].marker === marker ? true : false;
+        const results2 = board.cellCombinations[cell].occupied === true ? true : false;
 
-        const results = board.getUpdate(marker, cell)
-
-        expect(results).toStrictEqual({ 'marker': 'X', 'occupied': true, 'position': 0 })
+        expect(results1).toBeTruthy()
+        expect(results2).toBeTruthy()
     });
 });
 
@@ -100,7 +101,7 @@ describe('Board Validation', () => {
     const board = new BoardValidation()
     
     test("will return an object containing data about the cell if a valid cell is selected by a player when the validate() method is called", () => {
-        
+        // TO-DO => refactor for updated implementation: when cell is deemed valid and available, check that getUpdate() method is called
         const cell = 'A3'
         
         const results = board.validate(cell)
@@ -109,7 +110,7 @@ describe('Board Validation', () => {
     });
 
     test("will return an error message if an invalid row/col combination is provided when the validate() method is called", () => {
-        
+        // TO-DO => fix: currently not returning anything, only logging to the console due to bug with returning the error message
         const cell = 'A4'
         const errorMessage = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n`
 
@@ -119,7 +120,7 @@ describe('Board Validation', () => {
     });
 
     test("will return an error message if the cell selected by a player is valid, but occupied by the opponent when the validate() method is called", () => {
-        
+        // TO-DO => fix: currently not returning anything, only logging to the console due to bug with returning the error message
         const cell = 'A3'
         const marker = 'X'
         const errorMessage = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is occupied by the opponent player.\n\nPlease select an unoccupied position in the board.\n`
@@ -136,7 +137,7 @@ describe('Player', () => {
     const player = new Player()
 
     test("will return an object containing data about a player's assigned marker and if that player can make moves when the getPlayer() method is called", () => {
-        
+        // TO-DO => add "name" key to the assertion
         const player1 = player.player1
         const player2 = player.player2
 
@@ -145,7 +146,7 @@ describe('Player', () => {
     });
 
     test("will allow a player to select a cell on the board and return an error message if an invalid row/col combination is selected when the selectCell() method is called", () => {
-        
+        // TO-DO => fix: no error message returning; only logged to console
         const player1 = player.player1
         const cell = 'A4'
         const errorMessage = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n`
@@ -156,7 +157,7 @@ describe('Player', () => {
     });   
 
     test("will allow a player to select a cell on the board and return an object containing data about the cell if a valid, unoccupied row/col combination is selected when the selectCell() method is called", () => {
-
+        // TO-DO => refactor test statement and test that the validate() method is called to validate the cell
         const player2 = player.player2
         const cell = 'A1'
         const data = { 'marker':'', 'occupied': false, 'position': 0 }
@@ -166,18 +167,6 @@ describe('Player', () => {
         expect(results).toStrictEqual(data)
     });
 });
-/*
---> a method to validate a user's selected cell...
-some [(data structure) to store each player's distinct marker symbol - 'X' or 'O']
-    - create a player class with attributes that set player1 to X and player 2 to O?
-    - data structure containing current moves = updated cell array
-    - initialize the value of current player to null
-    - the value of the current player will alternate between players as valid moves are made
-    - if the current player is player1, then that player sends their selected cell for validation in the validation class
-    - if the cell is validated and data is returned regarding the selected cell, 
-    - the cell object is sent to a method that updates the array --> this should in turn, update the boardpersistance class from the assembly class
-take the [player's symbol] if that [(player's move) is valid and available]
-using the data object from validation, reassign the index value in the cells array from an empty string to a player's marker symbol
-*/
+
 
 
