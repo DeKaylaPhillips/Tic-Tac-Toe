@@ -48,14 +48,11 @@ export class BoardPersistence extends BoardAssembly {
     };
 
     getUpdate(playerMarker, cell) {
-       
         let position = this.cellCombinations[cell].position
         this.cellCombinations[cell].marker = playerMarker
         this.cellCombinations[cell].occupied = true 
-        BoardAssembly.cells[position] = playerMarker  
-        
-        console.log(this.printer.print())
-        return this.cellCombinations[cell]
+        BoardAssembly.cells[position] = playerMarker 
+        console.log(this.printer.print()) 
     };
 };
 
@@ -67,45 +64,48 @@ export class BoardValidation extends BoardPersistence {
         this.printer = printer
     };
 
-    validate(cell) {
+    validate(player, cell) {
         const data = this.getCell(cell)
-        const errorMessage1 = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n` 
-        const errorMessage2 = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is occupied by the opponent player.\n\nPlease select an unoccupied position in the board.\n`
+        let errorMessage1 = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n` 
+        let errorMessage2 = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is occupied by the opponent player.\n\nPlease select an unoccupied position in the board.\n`
         
         if (data && data.marker === '') {
-            // need to send cell data to be used to update the board
-            // essentially will return a display of the updated board, and then..
-            // instruct the next player to select a position on the board
-            // will eventually have to account for when to stop playing the game and selecting cells
-            return data 
+            console.log(`\n${player.name} has placed their token on the board. Opponent -- select a move.\n`)
+            this.getUpdate(player.marker, cell)
+
         } else if (!data) { 
+            console.log(errorMessage1)
             console.log(this.printer.print())
-            return errorMessage1
+            
+            // TO-DO => will need to take in new player input, assign to a variable, and pass the variable to the selectCell method of the player class
+        } else {
+            console.log(errorMessage2)
+            console.log(this.printer.print())
         }
-        console.log(this.printer.print())
-        return errorMessage2 
     };
 };
 
-export class Player {
+export class Player extends BoardValidation {
     constructor() {
-        this.player1 = { 'marker': 'X', 'move': false }
-        this.player2 = { 'marker': 'O', 'move': false }
-
-        const validator = new BoardValidation()
-        this.validator = validator
-
-        const printer = new BoardPrinter()
-        this.printer = printer
+        super();
+        this.player1 = { 'name': 'Player 1', 'marker': 'X', 'move': false } // may need to initiate player one to true for new games
+        this.player2 = { 'name': 'Player 2', 'marker': 'O', 'move': false }
+        
     };
     
-    selectCell(currentPlayer, cell) {
-        return this.validator.validate(cell)
-    }
+    selectCell(cell) { // marker sent to validate() method dependent on the current player whose move it is to make
+        if (this.player1.move) {
+            this.validate(this.player1, cell)
+            this.player1.move = false;
+            this.player2.move = true;
+        } else if (this.player2.move) {
+            this.validate(this.player2, cell)
+            this.player2.move = false;
+            this.player1.move = true;
+        };
+    };
 };
 
-const board = new BoardPersistence()
-console.log(board.getUpdate('X', 'A2'))
-console.log(board.getUpdate('O'))
+// can currently alternate between players everytime selectCell() called IF player1 move key is set to true
 
 
