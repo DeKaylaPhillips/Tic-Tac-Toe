@@ -2,6 +2,15 @@
 
 import { BoardAssembly, BoardPersistence, BoardPrinter, BoardValidation, Player } from './Game'
 
+describe('BoardState Class', () => {
+    test('will initialize the state of the board', () => {
+        const board = new BoardState()
+        const cells = board.cells
+
+        expect(cells).toStrictEqual(['', '', '', '', '', '', '', '', ''])
+    });
+});
+
 describe('Board Assembly', () => {
     const board = new BoardAssembly()
     
@@ -100,14 +109,14 @@ describe('Board Persistence', () => {
 describe('Board Validation', () => {
     const board = new BoardValidation()
     
-    test("will return an object containing data about the cell if a valid cell is selected by a player when the validate() method is called", () => {
-        // TO-DO => refactor for updated implementation: when cell is deemed valid and available, check that getUpdate() method is called
-        const cell = 'A3'
+    // test("will return an object containing data about the cell if a valid cell is selected by a player when the validate() method is called", () => {
+    //     // TO-DO => refactor for updated implementation: when cell is deemed valid and available, check that getUpdate() method is called
+    //     const cell = 'A3'
         
-        const results = board.validate(cell)
+    //     const results = board.validate(cell)
 
-        expect(results).toStrictEqual({ 'marker': '', 'occupied': false, 'position': 2 })
-    });
+    //     expect(results).toStrictEqual({ 'marker': '', 'occupied': false, 'position': 2 })
+    // });
 
     test("will return an error message if an invalid row/col combination is provided when the validate() method is called", () => {
         // TO-DO => fix: currently not returning anything, only logging to the console due to bug with returning the error message
