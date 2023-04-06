@@ -1,6 +1,16 @@
-export class BoardAssembly {
+export class Board {
 
-    static cells = new Array(9).fill(''); // make cells a static property of the BoardAssembly class
+    static cells = new Array(9).fill('')
+
+    constructor() {}
+
+    getBoard() {
+        return Board.cells
+    };
+}
+export class BoardAssembly { 
+
+    static cells = new Array(9).fill(''); 
 
     constructor(rows = 3) {
         this.rowTotal = rows;
@@ -24,6 +34,7 @@ export class BoardPrinter extends BoardAssembly {
         return `  ${BoardAssembly.cells[0]}  |  ${BoardAssembly.cells[1]}  |  ${BoardAssembly.cells[2]}  \n${this.line}\n  ${BoardAssembly.cells[3]}  |  ${BoardAssembly.cells[4]}  |  ${BoardAssembly.cells[5]}  \n${this.line}\n  ${BoardAssembly.cells[6]}  |  ${BoardAssembly.cells[7]}  |  ${BoardAssembly.cells[8]}  `;
     };
 };
+
 export class BoardPersistence extends BoardAssembly { 
     constructor() {
         super();
@@ -56,7 +67,7 @@ export class BoardPersistence extends BoardAssembly {
     };
 };
 
-export class BoardValidation extends BoardPersistence {
+export class BoardValidation extends BoardPersistence { 
     constructor() {
         super();
 
@@ -85,19 +96,19 @@ export class BoardValidation extends BoardPersistence {
     };
 };
 
-export class Player extends BoardValidation {
+export class Player extends BoardValidation { 
     constructor() {
         super();
-        this.player1 = { 'name': 'Player 1', 'marker': 'X', 'move': false } // may need to initiate player one to true for new games
+        this.player1 = { 'name': 'Player 1', 'marker': 'X', 'move': true } // may need to initiate player one to true for new games
         this.player2 = { 'name': 'Player 2', 'marker': 'O', 'move': false }
-        
     };
     
-    selectCell(cell) { // marker sent to validate() method dependent on the current player whose move it is to make
+    selectCell(cell) { 
         if (this.player1.move) {
             this.validate(this.player1, cell)
             this.player1.move = false;
             this.player2.move = true;
+            
         } else if (this.player2.move) {
             this.validate(this.player2, cell)
             this.player2.move = false;
@@ -106,6 +117,11 @@ export class Player extends BoardValidation {
     };
 };
 
-// can currently alternate between players everytime selectCell() called IF player1 move key is set to true
+
+const player = new Player()
+player.selectCell('A1')
+player.selectCell('B2')
+player.selectCell('B2')
+
 
 

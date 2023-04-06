@@ -1,13 +1,14 @@
 // To run tests --> $ npm test
 
-import { BoardAssembly, BoardPersistence, BoardPrinter, BoardValidation, Player } from './Game'
+import { Board, BoardAssembly, BoardPersistence, BoardPrinter, BoardValidation, Player } from './Game'
 
-describe('BoardState Class', () => {
-    test('will initialize the state of the board', () => {
-        const board = new BoardState()
-        const cells = board.cells
+describe('Board Class', () => {
+    test('will initialize and return the state of the board', () => {
+        const board = new Board()
+        
+        const results = board.getBoard()
 
-        expect(cells).toStrictEqual(['', '', '', '', '', '', '', '', ''])
+        expect(results).toStrictEqual(['', '', '', '', '', '', '', '', ''])
     });
 });
 
