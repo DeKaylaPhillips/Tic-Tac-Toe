@@ -1,5 +1,5 @@
-import { TicTacToe } from "./ticTacToe"
-import {Board} from "./board"
+import { TicTacToe } from "../../lib/TicTacToe/ticTacToe"
+import {Board} from "../../lib/Board/board"
 
 class DisplayMock {
     constructor(){
