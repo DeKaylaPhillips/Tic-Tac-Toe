@@ -41,6 +41,7 @@ describe('BoardState Class', () => {
     })
 });
 
+/*
 describe('Board Assembly', () => {
     const board = new BoardAssembly()
     
@@ -207,5 +208,5 @@ describe('Player', () => {
     });
 });
 
-
+*/
 

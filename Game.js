@@ -20,10 +20,12 @@ export class BoardState {
         return this.usedCells
     };
 }
-export class BoardAssembly { 
 
-    static cells = new Array(9).fill(''); 
+// Responsible for the construction of a Tic-Tac-Toe board (does not grant ability to manipulate data within the board)
+export class BoardAssembly { // *** IS THIS CLASS NEEDED WITH NEW BOARDSTATE IMPLEMENTATION? *** 
 
+    // static cells = new Array(9).fill(''); // * MOVED TO BOARDSTATE SO ASSEMBLY CLASS IS NOT RESPONSIBLE FOR MANAGING THE STATE OF THE PROGRAM...
+    
     constructor(rows = 3) {
         this.rowTotal = rows;
         this.row = "    |   |    ";
@@ -37,13 +39,15 @@ export class BoardAssembly {
     };
 };
 
-export class BoardPrinter extends BoardAssembly { 
+
+// Responsible for displaying formatted Tic-Tac-Toe board to the console (must contain board data that is managed in the BoardState class)
+export class BoardPrinter extends BoardAssembly { // Can the board assembly class be removed and the dashed line property be moved here since the board will automatically be constructed as defined here? 
     constructor() {
         super();
     };
 
     print() {
-        return `  ${BoardAssembly.cells[0]}  |  ${BoardAssembly.cells[1]}  |  ${BoardAssembly.cells[2]}  \n${this.line}\n  ${BoardAssembly.cells[3]}  |  ${BoardAssembly.cells[4]}  |  ${BoardAssembly.cells[5]}  \n${this.line}\n  ${BoardAssembly.cells[6]}  |  ${BoardAssembly.cells[7]}  |  ${BoardAssembly.cells[8]}  `;
+        return `  ${BoardState.cells[0]}  |  ${BoardState.cells[1]}  |  ${BoardState.cells[2]}  \n${this.line}\n  ${BoardState.cells[3]}  |  ${BoardState.cells[4]}  |  ${BoardState.cells[5]}  \n${this.line}\n  ${BoardState.cells[6]}  |  ${BoardState.cells[7]}  |  ${BoardState.cells[8]}  `;
     };
 };
 
@@ -70,7 +74,7 @@ export class BoardPersistence extends BoardAssembly {
         return this.cellCombinations[cell] ? this.cellCombinations[cell] : false;
     };
 
-    getUpdate(playerMarker, cell) {
+    getUpdate(playerMarker, cell) { 
         let position = this.cellCombinations[cell].position
         this.cellCombinations[cell].marker = playerMarker
         this.cellCombinations[cell].occupied = true 
@@ -130,12 +134,12 @@ export class Player extends BoardValidation {
 };
 
 
-// const game = new BoardState()
-// console.log(game.getBoardState())
-// console.log(game.updateBoardState(0, 'A1'))
-// console.log(game.getBoardState())
-// console.log(game.updateBoardState(2, 'A3'))
-// console.log(game.getBoardState())
+const game = new BoardState()
+console.log(game.getBoardState())
+console.log(game.updateBoardState(0, 'A1'))
+console.log(game.getBoardState())
+console.log(game.updateBoardState(2, 'A3'))
+console.log(game.getBoardState())
 
 
 
