@@ -1,15 +1,44 @@
 // To run tests --> $ npm test
 
-import { Board, BoardAssembly, BoardPersistence, BoardPrinter, BoardValidation, Player } from './Game'
+import { BoardState, BoardAssembly, BoardPersistence, BoardPrinter, BoardValidation, Player } from './Game'
 
-describe('Board Class', () => {
-    test('will initialize and return the state of the board', () => {
-        const board = new Board()
+describe('BoardState Class', () => {
+
+    const board = new BoardState();
+
+    test('will initialize and stores the state of the game board/cells in a static data structure', () => {
         
-        const results = board.getBoard()
+        const results = BoardState.cells
 
-        expect(results).toStrictEqual(['', '', '', '', '', '', '', '', ''])
+        expect(results).toStrictEqual(expect.any(Array));
     });
+
+    test('will return the data structure responsible for storing and modifying the state of the game when the getBoard() method is called', () => {  
+        
+        BoardState.cells[0] = 'A1'
+        const results = board.getBoardState()
+        
+        expect(results).toStrictEqual(BoardState.cells)
+    });
+
+    test('will update the state of the game board and return a boolean value when the updateBoard() method is called', () => {
+        const position = 0
+        const cell = 'A1'
+
+        const results = board.updateBoardState(position, cell)
+
+        expect(results).toBeTruthy()
+    });
+
+    test('will return a data structure containing all occupied cells in the board when the getUnavailableCells() method is called', () => {
+        
+        board.updateBoardState(0, 'A1')
+        board.updateBoardState(1, 'A2')
+        board.updateBoardState(2, 'A3')
+        const results = board.getUnavailableCells()
+      
+        expect(results).toStrictEqual(['A1', 'A2', 'A3'])
+    })
 });
 
 describe('Board Assembly', () => {

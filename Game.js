@@ -1,11 +1,23 @@
-export class Board {
+export class BoardState {
 
-    static cells = new Array(9).fill('')
+    static cells = new Array(9).fill('') // initialize the state of the game board
 
-    constructor() {}
+    constructor() {
+        this.usedCells = new Array(0)
+    }
 
-    getBoard() {
-        return Board.cells
+    getBoardState() { // return the current state of the game board
+        return BoardState.cells
+    };
+    
+    updateBoardState(position, cell) { // update the state of the board and confirm change
+        BoardState.cells[position] = cell
+        return true
+    }; 
+
+    getUnavailableCells() { // return a list of occupied cells in the board
+        BoardState.cells.forEach(cell => cell !== '' ? this.usedCells.push(cell) : '')
+        return this.usedCells
     };
 }
 export class BoardAssembly { 
@@ -118,10 +130,13 @@ export class Player extends BoardValidation {
 };
 
 
-const player = new Player()
-player.selectCell('A1')
-player.selectCell('B2')
-player.selectCell('B2')
+// const game = new BoardState()
+// console.log(game.getBoardState())
+// console.log(game.updateBoardState(0, 'A1'))
+// console.log(game.getBoardState())
+// console.log(game.updateBoardState(2, 'A3'))
+// console.log(game.getBoardState())
+
 
 
 
