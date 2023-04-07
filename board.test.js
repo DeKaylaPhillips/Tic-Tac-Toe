@@ -1,6 +1,6 @@
 // To run tests --> $ npm test
 
-import { Board } from './Game'
+import { Board } from './board'
 
 describe('display a single row', () => {
     test('when the displaySingleRow function is called, the console will display a single row correctly', () => {
