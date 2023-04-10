@@ -6,38 +6,47 @@ describe('BoardState Class', () => {
 
     const board = new BoardState();
 
-    test('will initialize and stores the state of the game board/cells in a static data structure', () => {
+    test('will initialize and store the state of the moves in the board in a static list', () => {
         
-        const results = BoardState.cells
+        const cellArr = BoardState.cells;
 
-        expect(results).toStrictEqual(expect.any(Array));
+        expect(cellArr).toStrictEqual(expect.any(Array));
     });
+
+    test('will initialize and store the state of the cells in the board in an object containing data about each cell', () => {
+
+        const cellObj = board.cellCombinations;
+
+        expect(cellObj).toStrictEqual(expect.any(Object));
+    })
 
     test('will return the data structure responsible for storing and modifying the state of the game when the getBoard() method is called', () => {  
         
-        const results = board.getBoardStateArray()
+        const expectedResults = BoardState.cells
+
+        const boardState = board.getBoardStateArray();
         
-        expect(results).toStrictEqual(BoardState.cells)
+        expect(boardState).toBe(expectedResults);
     });
 
     test('will update the state of the game board array when the updateBoardStateArray() method is called', () => {
         
-        const expectedBoardArr = ['X', '', '', '', '', '', '', '', '']   
+        const boardArray = BoardState.cells
+        const expectedResults = ['X', '', '', '', '', '', '', '', ''];   
         
-        board.updateBoardStateArray('A1', 'X')
-        const newCells = BoardState.cells
+        board.updateBoardStateArray('A1', 'X');
 
-        expect(newCells).toStrictEqual(expectedBoardArr)
+        expect(boardArray).toStrictEqual(expectedResults);
     });
 
     test('will update the state of the game board object when the updateBoardStateObject() method is called', () => {
         
-        const expectedBoardObject = { 'marker': 'X', 'occupied': true, 'position': 0 }
+        const cellObject = board.cellCombinations['A1'];
+        const expectedResults = { 'marker': 'X', 'occupied': true, 'position': 0 };
 
-        board.updateBoardStateObject('A1', 'X')
-        const newObject = board.cellCombinations['A1']
+        board.updateBoardStateObject('A1', 'X');
 
-        expect(newObject).toStrictEqual(expectedBoardObject)
+        expect(cellObject).toStrictEqual(expectedResults);
     });
 });
 
@@ -46,16 +55,69 @@ describe('Board Printer', () => {
 
     test("will return a display of a board to the console containing cell values that are able to be manipulated when the print() method is called", () => {
         
-        BoardState.cells[2] == 'X'
-        const expectedBoard = `  ${BoardState.cells[0]}  |  ${BoardState.cells[1]}  |  ${BoardState.cells[2]}  \n${board.line}\n  ${BoardState.cells[3]}  |  ${BoardState.cells[4]}  |  ${BoardState.cells[5]}  \n${board.line}\n  ${BoardState.cells[6]}  |  ${BoardState.cells[7]}  |  ${BoardState.cells[8]}  `
-
-        const displayBoard = board.print()
+        const expectedResults = `  ${BoardState.cells[0]}  |  ${BoardState.cells[1]}  |  ${BoardState.cells[2]}  \n${board.line}\n  ${BoardState.cells[3]}  |  ${BoardState.cells[4]}  |  ${BoardState.cells[5]}  \n${board.line}\n  ${BoardState.cells[6]}  |  ${BoardState.cells[7]}  |  ${BoardState.cells[8]}  `
         
-        expect(displayBoard).toStrictEqual(expectedBoard)
+        BoardState.cells[2] == 'X'
+        const formattedBoard = board.print()
+        
+        expect(formattedBoard).toStrictEqual(expectedResults)
     });
 });
 
+describe('Board Validation', () => {
 
+    test('will return an error message when a player does not select a cell when the validateMoveExists() method is called', () => {
+        const validator = new BoardValidation('')
+        
+        const noInputValidator = validator.validateMoveExists();
+
+        expect(noInputValidator).toBe(validator.errorMessage1);
+        // expect(invalidCellValidator).toBe(validator.errorMessage1);
+    });
+
+    test('will return an error message if a player selects a cell with an invalid row/col combination when the validateMoveExists() method is called', () => {
+        const validator = new BoardValidation('D1')
+        
+        const noInputValidator = validator.validateMoveExists();
+
+        expect(noInputValidator).toBe(validator.errorMessage1);
+    });
+
+    test('will return an error message if a player selects a taken cell on the board when the validateMoveAvailable() method is called', () => {
+        
+        const validator = new BoardValidation('A1')
+        state.validateMoveExists()
+        state.updateBoardStateArray('A1', 'X')
+        console.log(state.cellCombinations)
+
+        state.validateMoveExists('A1')
+        const expectedResults = state.validateMoveAvailable()
+
+        expect(expectedResults).toBe(validator.errorMessage2)
+    });
+
+    // test("will return an error message if an invalid row/col combination is provided when the validate() method is called", () => {
+    //     // TO-DO => fix: currently not returning anything, only logging to the console due to bug with returning the error message
+    //     const cell = 'A4'
+    //     const errorMessage = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n`
+
+    //     const results = board.validate(cell)
+
+    //     expect(results).toBe(errorMessage)
+    // });
+
+    // test("will return an error message if the cell selected by a player is valid, but occupied by the opponent when the validate() method is called", () => {
+    //     // TO-DO => fix: currently not returning anything, only logging to the console due to bug with returning the error message
+    //     const cell = 'A3'
+    //     const marker = 'X'
+    //     const errorMessage = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is occupied by the opponent player.\n\nPlease select an unoccupied position in the board.\n`
+
+    //     board.cellCombinations[cell].marker = marker
+    //     const results = board.validate(cell)
+
+    //     expect(results).toBe(errorMessage)
+    // });
+});
 
 
 
@@ -101,87 +163,7 @@ describe('Board Assembly', () => {
 });
 */
 
-/*
-describe('Board Persistence', () => {
-    const board = new BoardPersistence()
-
-    test("contains a data structure that will allow row/column combinations and their data to be accessed when a valid cell is selected on the board", () => {
-        
-        const cells = board.cellCombinations
-        const validCell = 'A3'
-        const invalidCell = 'D4'
-
-        const results1 = cells[validCell] ? true : false
-        const results2 = cells[invalidCell] ? true : false
-
-        expect(results1).toBeTruthy()
-        expect(results2).toBeFalsy()
-    });
-
-    test("will return a data structure containing information about a cell only if a valid cell combination is passed to the getCell() method", () => {
-        
-        // valid cells
-        const results1 = board.getCell('A3')
-        // invalid cells
-        const results2 = board.getCell('')
-        const results3 = board.getCell()
-        const results4 = board.getCell('D2')
-
-        expect(results1).toStrictEqual({ 'marker': '', 'occupied': false, 'position': 2 })
-        expect(results2).toBeFalsy()
-        expect(results3).toBeFalsy()
-        expect(results4).toBeFalsy()
-    });
-
-    test("will update the data for a cell selected by a player when the getUpdate() method is called", () => {
-        const marker = 'X'
-        const cell = 'A1'
-    
-        board.getUpdate(marker, cell)
-        const results1 = board.cellCombinations[cell].marker === marker ? true : false;
-        const results2 = board.cellCombinations[cell].occupied === true ? true : false;
-
-        expect(results1).toBeTruthy()
-        expect(results2).toBeTruthy()
-    });
-});
-
-describe('Board Validation', () => {
-    const board = new BoardValidation()
-    
-    // test("will return an object containing data about the cell if a valid cell is selected by a player when the validate() method is called", () => {
-    //     // TO-DO => refactor for updated implementation: when cell is deemed valid and available, check that getUpdate() method is called
-    //     const cell = 'A3'
-        
-    //     const results = board.validate(cell)
-
-    //     expect(results).toStrictEqual({ 'marker': '', 'occupied': false, 'position': 2 })
-    // });
-
-    test("will return an error message if an invalid row/col combination is provided when the validate() method is called", () => {
-        // TO-DO => fix: currently not returning anything, only logging to the console due to bug with returning the error message
-        const cell = 'A4'
-        const errorMessage = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is not a valid row/column combination on the board.\n\nPlease select a valid row/column combination on the board:\n\tRows are denoted by letters A, B, & C from top to bottom.\n\tColumns are denoted by letters 1, 2, & 3 from left to right.\n\ni.e. "B3"\n`
-
-        const results = board.validate(cell)
-
-        expect(results).toBe(errorMessage)
-    });
-
-    test("will return an error message if the cell selected by a player is valid, but occupied by the opponent when the validate() method is called", () => {
-        // TO-DO => fix: currently not returning anything, only logging to the console due to bug with returning the error message
-        const cell = 'A3'
-        const marker = 'X'
-        const errorMessage = `\n--- INVALID MOVE BY PLAYER ---\n\n'${cell}' is occupied by the opponent player.\n\nPlease select an unoccupied position in the board.\n`
-
-        board.cellCombinations[cell].marker = marker
-        const results = board.validate(cell)
-
-        expect(results).toBe(errorMessage)
-    });
-});
-        
-       
+/*     
 describe('Player', () => {
     const player = new Player()
 
