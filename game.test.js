@@ -15,31 +15,54 @@ describe('BoardState Class', () => {
 
     test('will return the data structure responsible for storing and modifying the state of the game when the getBoard() method is called', () => {  
         
-        BoardState.cells[0] = 'A1'
-        const results = board.getBoardState()
+        const results = board.getBoardStateArray()
         
         expect(results).toStrictEqual(BoardState.cells)
     });
 
-    test('will update the state of the game board and return a boolean value when the updateBoard() method is called', () => {
-        const position = 0
-        const cell = 'A1'
+    test('will update the state of the game board array when the updateBoardStateArray() method is called', () => {
+        
+        const expectedBoardArr = ['X', '', '', '', '', '', '', '', '']   
+        
+        board.updateBoardStateArray('A1', 'X')
+        const newCells = BoardState.cells
 
-        const results = board.updateBoardState(position, cell)
-
-        expect(results).toBeTruthy()
+        expect(newCells).toStrictEqual(expectedBoardArr)
     });
 
-    test('will return a data structure containing all occupied cells in the board when the getUnavailableCells() method is called', () => {
+    test('will update the state of the game board object when the updateBoardStateObject() method is called', () => {
         
-        board.updateBoardState(0, 'A1')
-        board.updateBoardState(1, 'A2')
-        board.updateBoardState(2, 'A3')
-        const results = board.getUnavailableCells()
-      
-        expect(results).toStrictEqual(['A1', 'A2', 'A3'])
-    })
+        const expectedBoardObject = { 'marker': 'X', 'occupied': true, 'position': 0 }
+
+        board.updateBoardStateObject('A1', 'X')
+        const newObject = board.cellCombinations['A1']
+
+        expect(newObject).toStrictEqual(expectedBoardObject)
+    });
 });
+
+describe('Board Printer', () => {
+    const board = new BoardPrinter()
+
+    test("will return a display of a board to the console containing cell values that are able to be manipulated when the print() method is called", () => {
+        
+        BoardState.cells[2] == 'X'
+        const expectedBoard = `  ${BoardState.cells[0]}  |  ${BoardState.cells[1]}  |  ${BoardState.cells[2]}  \n${board.line}\n  ${BoardState.cells[3]}  |  ${BoardState.cells[4]}  |  ${BoardState.cells[5]}  \n${board.line}\n  ${BoardState.cells[6]}  |  ${BoardState.cells[7]}  |  ${BoardState.cells[8]}  `
+
+        const displayBoard = board.print()
+        
+        expect(displayBoard).toStrictEqual(expectedBoard)
+    });
+});
+
+
+
+
+
+
+
+
+
 
 /*
 describe('Board Assembly', () => {
@@ -76,23 +99,9 @@ describe('Board Assembly', () => {
         expect(rowsWithline).toBe(rowsAndLines)
     });
 });
+*/
 
-
-describe('Board Printer', () => {
-    const board = new BoardPrinter()
-
-    test("will return a display of a board to the console containing cell values that are able to be manipulated when the print() method is called", () => {
-        
-        const cells = BoardAssembly.cells
-        const line = board.line
-        const expectedBoard = `  ${cells[0]}  |  ${cells[1]}  |  ${cells[2]}  \n${line}\n  ${cells[3]}  |  ${cells[4]}  |  ${cells[5]}  \n${line}\n  ${cells[6]}  |  ${cells[7]}  |  ${cells[8]}  `
-
-        const displayBoard = board.print()
-
-        expect(displayBoard).toStrictEqual(expectedBoard)
-    });
-});
-
+/*
 describe('Board Persistence', () => {
     const board = new BoardPersistence()
 
