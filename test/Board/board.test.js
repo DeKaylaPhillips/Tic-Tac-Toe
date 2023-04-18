@@ -1,70 +1,58 @@
 import { Board, Display } from '../../lib/Board/board'
 
 describe('Board', () => {
-    test('will return a structure storing each individual cell in the board when getCells() is called', () => {
-        const board = new Board()
-        const expectedResults = board.cells
+    let board;
+    
+    beforeEach(() => {
+        board = new Board();
+    });
 
-        const cellStructure = board.getCells()
-        
-        expect(cellStructure).toBe(expectedResults)
+    describe('getCells()', () => {
+        test('will return a structure storing each individual cell in the board', () => {
+            const cellStructure = board.getCells()
+            expect(cellStructure).toBe(board.cells)
+        });    
     });
 });
 
 describe('Display', () => {
-    test('will format a cell without a column separator into a column when formatCells() is called', () => {
-        const board = new Board(1, 3)
-        const display = new Display(board)
-        const expectedResults = ` `;
+    let board, display;
 
-        const formattedCellWithSeparator = display.formatCells(board.cells[0][2], 2)
-
-        expect(formattedCellWithSeparator).toBe(expectedResults)
-
+    beforeEach(() => {
+        board = new Board();
+        display = new Display(board);
     });
 
-    test('will format a cell with a column separator into a column when formatCells() is called', () => {
-        const board = new Board(1, 3)
-        const display = new Display(board)
-        const expectedResults = `   |`;
+    describe('formatCells()', () => {
+        test('will format a cell without a column separator', () => {
+            const formattedCellWithSeparator = display.formatCells(board.cells[0][2], 2)
+            expect(formattedCellWithSeparator).toBe(` `)
+        });
 
-        const formattedCellNoSeparator = display.formatCells(board.cells[0][0], 0)
-
-        expect(formattedCellNoSeparator).toBe(expectedResults)
-
+        test('will format a cell with a column separator', () => {
+            const formattedCellNoSeparator = display.formatCells(board.cells[0][0], 0)
+            expect(formattedCellNoSeparator).toBe(`   |`)
+        });
     });
 
-    test('will print a single row to the console when an instance of the Board is passed to the class where 1 is an arg for rows', () => {
-        const board = new Board(1, 3)
-        const display = new Display(board)
-        const expectedResults = display.boardDisplay
+    describe('printBoard()', () => {
+        test('will print 1 row when the board is instantiated with only 1 row', () => {
+            const board = new Board(1, 3)
+            const display = new Display(board)
+            const row = display.printBoard()
+            expect(row).toBe(`   |    |  `)
+        });
 
-        const row = display.printBoard()
-        
-        expect(row).toBe(expectedResults)
+        test('will print 3 rows with no divider when the board is assembled with an empty string', () => {
+            display.assembleBoard('')
+            const rows = display.printBoard()
+            expect(rows).toBe(`   |    |  \n   |    |  \n   |    |  `)
+        });
+
+        test('will print a standard 3x3 Tic-Tac-Toe board', () => {
+            const printedBoard = display.printBoard()
+            expect(printedBoard).toBe(display.boardDisplay)
+        });
     });
-    
-    test('will print 3 stacked rows to the console when an instance of the Board is passed to the class where 3 is an arg for rows', () => {
-        const board = new Board(3, 3)
-        const display = new Display(board)
-        display.assembleBoard('')
-        const expectedResults = display.boardDisplay
-
-        const rows = display.printBoard()
-
-        expect(rows).toBe(expectedResults)
-    });
-
-    test('will print a Tic-Tac-Toe board to the console when an instance of the Board is passed to the class', () => {
-        const board = new Board(3, 3)
-        const display = new Display(board)
-        const expectedResults = display.boardDisplay
-
-        const printedBoard = display.printBoard()
-        
-        expect(printedBoard).toBe(expectedResults)
-    });
-
-
 });
 
