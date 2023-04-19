@@ -1,4 +1,5 @@
-import { Board, Display } from '../../lib/Board/board'
+import { Board } from '../../lib/Board/board'
+import { Display } from '../../lib/Display/display'
 
 describe('Board', () => {
     let board;
