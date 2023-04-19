@@ -35,6 +35,18 @@ describe('Display', () => {
         });
     });
 
+    describe('assembleBoard()', () => {
+        test('will update and assemble formatted cells according to the current state of the board\'s cells', () => {
+            const initialBoardDisplay = display.boardDisplay
+            board.cells[0][0] = 'X' 
+
+            display.assembleBoard()
+            const newBoardDisplay = display.boardDisplay
+
+            expect(initialBoardDisplay).not.toBe(newBoardDisplay) 
+        });
+    });
+
     describe('printBoard()', () => {
         test('will print 1 row when the board is instantiated with only 1 row', () => {
             const board = new Board(1, 3)
@@ -49,7 +61,7 @@ describe('Display', () => {
             expect(rows).toBe(`   |    |  \n   |    |  \n   |    |  `)
         });
 
-        test('will print a standard 3x3 Tic-Tac-Toe board', () => {
+        test('will print a standard, user-friendly 3x3 Tic-Tac-Toe board', () => {
             const printedBoard = display.printBoard()
             expect(printedBoard).toBe(display.boardDisplay)
         });
