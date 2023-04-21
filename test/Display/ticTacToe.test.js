@@ -2,12 +2,14 @@ import { TicTacToe } from "../../lib/TicTacToe/ticTacToe"
 import {Board} from "../../lib/Board/board"
 
 class DisplayMock {
+    /* constructor():void */
     constructor(){
         this.dataOutputted; 
         this.nTimesLogCalled = 0
     }
 
-    log(something){
+    /* output(objectToDisplay:String):void */
+    output(something){
         this.nTimesLogCalled++
         this.dataOutputted = something
     }
@@ -18,9 +20,9 @@ describe('TicTacToe', () => {
         const board = new Board()
 
         const displayMock = new DisplayMock()
-        const game = new TicTacToe(board, displayMock)
+        const game = new TicTacToe(displayMock)
 
-        const expectedDefaultBoardOutput = board.printBoard()
+        const expectedDefaultBoardOutput = board.toString()
 
         game.run()
         
