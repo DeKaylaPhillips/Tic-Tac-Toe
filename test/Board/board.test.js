@@ -39,7 +39,9 @@ describe('Board', () => {
             const rowOutput = `   |    |  `
             expect(printedBoard).toBe(`${rowOutput}\n${board.rowSeparator}\n${rowOutput}\n${board.rowSeparator}\n${rowOutput}`)
         });
+    });
 
+    describe('assembleBoard()', () => {
         test('will assemble formatted cells according to the current state of the board\'s cells in a string format', () => {
             const initialBoardDisplay = board.boardDisplay
             board.cells[0][0] = 'X' 
