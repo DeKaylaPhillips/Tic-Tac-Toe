@@ -1,33 +1,31 @@
 import { TicTacToe } from "../../lib/TicTacToe/ticTacToe"
-import {Board} from "../../lib/Board/board"
+import { Board } from "../../lib/Board/board"
 
 class DisplayMock {
     /* constructor():void */
-    constructor(){
+    constructor() {
         this.dataOutputted; 
-        this.nTimesLogCalled = 0
-    }
+        this.nTimesLogCalled = 0;
+    };
 
     /* output(objectToDisplay:String):void */
-    output(something){
-        this.nTimesLogCalled++
-        this.dataOutputted = something
-    }
-} 
+    output(objectToDisplay){
+        this.nTimesLogCalled++;
+        this.dataOutputted = objectToDisplay;
+    };
+}; 
 
 describe('TicTacToe', () => {
-    test('will output to the user', () => {
-        const board = new Board()
+    test('will output string data to the user', () => {
+        const board = new Board();
+        const displayMock = new DisplayMock();
+        const game = new TicTacToe(displayMock);
 
-        const displayMock = new DisplayMock()
-        const game = new TicTacToe(displayMock)
+        const expectedDefaultBoardOutput = board.toString();
 
-        const expectedDefaultBoardOutput = board.toString()
-
-        game.run()
+        game.run();
         
-        expect(displayMock.nTimesLogCalled).toBe(1)
-        expect(displayMock.dataOutputted).toBe(expectedDefaultBoardOutput)
-
-    })
-})
+        expect(displayMock.nTimesLogCalled).toBe(1);
+        expect(displayMock.dataOutputted).toBe(expectedDefaultBoardOutput);
+    });
+});
