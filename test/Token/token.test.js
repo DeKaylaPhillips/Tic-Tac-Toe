@@ -12,15 +12,25 @@ describe('Token Class', () => {
 
     describe('validateString()', () => {
         test('will return a true boolean if a token is a string', () => {
-            const token = new Token('X')
-            const validation = token.validateString()
-            expect(validation).toBeTruthy()
+            const token1 = new Token('X')
+            const token2 = new Token('/.ABC')
+
+            const validation1 = token1.validateString()
+            const validation2 = token2.validateString()
+
+            expect(validation1).toBeTruthy()
+            expect(validation2).toBeTruthy()
         });
 
         test('will return a false boolean if a token is NOT a string', () => {
-            const token = new Token('X')
-            const validation = token.validateString()
-            expect(validation).toBeFalsy()
+            const token1 = new Token(1)
+            const token2 = new Token([])
+
+            const validation1 = token1.validateString()
+            const validation2 = token2.validateString()
+
+            expect(validation1).toBeFalsy()
+            expect(validation2).toBeFalsy()
         });  
     });
     
