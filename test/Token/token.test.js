@@ -18,7 +18,9 @@ describe('Token Class', () => {
         });
 
         test('will return a false boolean if a token is NOT a string', () => {
-            null;
+            const token = new Token('X')
+            const validation = token.validateString()
+            expect(validation).toBeFalsy()
         });  
     });
     
