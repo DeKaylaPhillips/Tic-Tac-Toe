@@ -12,4 +12,15 @@ describe('Token', () => {
         const playerToken = token.player
         expect(playerToken).toBe('X')
     });
+
+    describe('validateToken()', () => {
+        test('will return true if a token is a string with a length of 1 character', () => {
+            token = new Token('ABC')
+
+            const error = token.validateToken(token)
+        
+            expect(error).toBe('Error: Invalid player token.')
+        });
+    });
+    
 });
