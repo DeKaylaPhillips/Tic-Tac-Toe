@@ -12,7 +12,9 @@ describe('Token Class', () => {
 
     describe('validateString()', () => {
         test('will return a true boolean if a token is a string', () => {
-            null;
+            const token = new Token('X')
+            const validation = token.validateString()
+            expect(validation).toBeTruthy()
         });
 
         test('will return a false boolean if a token is NOT a string', () => {
