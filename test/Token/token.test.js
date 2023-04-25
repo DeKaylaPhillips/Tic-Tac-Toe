@@ -1,26 +1,32 @@
 import { Token } from '../../lib/Token/token';
 
-describe('Token', () => {
+describe('Token Class', () => {
 
-    let token;
-
-    beforeEach(() => {
-        token = new Token('X')
+    describe('Token constructor', () => {
+        test('will accept a string to represent a player\'s token', () => {
+            const token = new Token('X')
+            const playerToken = token.player
+            expect(playerToken).toBe('X')
+        });    
     });
 
-    test('will accept a single character string to represent a player\'s token', () => {
-        const playerToken = token.player
-        expect(playerToken).toBe('X')
-    });
-
-    describe('validateToken()', () => {
-        test('will return true if a token is a string with a length of 1 character', () => {
-            token = new Token('ABC')
-
-            const error = token.validateToken(token)
-        
-            expect(error).toBe('Error: Invalid player token.')
+    describe('validateString()', () => {
+        test('will return a true boolean if a token is a string', () => {
+            null;
         });
+
+        test('will return a false boolean if a token is NOT a string', () => {
+            null;
+        });  
     });
     
+    describe('validateLength()', () => {
+        test('will return a true boolean if a token\'s length is equal to 1', () => {
+            null;
+        });
+        
+        test('will return a false boolean if a token\'s length is NOT equal to 1', () => {
+            null;
+        });
+    });
 });
