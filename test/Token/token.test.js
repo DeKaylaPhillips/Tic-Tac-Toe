@@ -6,27 +6,27 @@ describe('Token Class', () => {
     beforeEach(() => {
         token = new Token('X')
     });
-
+    
     describe('Token constructor', () => {
-        test('will return a validated token', () => {
-            const playerToken = token.player
+
+        test('will accept and assign the player\'s value to a validated token value', () => {
+            const playerToken = token.playerToken
             expect(playerToken).toBe('X')
         });
         
-        test('will return null when a token is invalid', () => {
+        test('will assign the player a null value when a token is invalid', () => {
             const token = new Token('XO')
-            const playerToken = token.player
+            const playerToken = token.playerToken
             expect(playerToken).toBe(null)
+        }); 
+    });
+
+    describe('getToken()', () => {
+
+        test('will return a string token with a length of 1', () => {
+            const playerToken = token.getToken()
+            expect(playerToken).toBe('X')
         });
-
-        test('will accept a token that is a string', () => {
-            const tokenType = typeof token.player
-            expect(tokenType).toBe('string')
-        });  
-
-        test('will accept a token that is a length of 1', () => {
-            const tokenLength = token.player.length
-            expect(tokenLength).toEqual(1)
-        });   
+        
     });
 });
