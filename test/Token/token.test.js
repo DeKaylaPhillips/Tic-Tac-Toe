@@ -10,37 +10,51 @@ describe('Token Class', () => {
         });    
     });
 
-    describe('validateString()', () => {
+    describe('isString()', () => {
         test('will return a true boolean if a token is a string', () => {
             const token1 = new Token('X')
             const token2 = new Token('/.ABC')
 
-            const validation1 = token1.validateString()
-            const validation2 = token2.validateString()
+            const stringValidator1 = token1.isString()
+            const stringValidator2 = token2.isString()
 
-            expect(validation1).toBeTruthy()
-            expect(validation2).toBeTruthy()
+            expect(stringValidator1).toBeTruthy()
+            expect(stringValidator2).toBeTruthy()
         });
 
         test('will return a false boolean if a token is NOT a string', () => {
             const token1 = new Token(1)
             const token2 = new Token([])
 
-            const validation1 = token1.validateString()
-            const validation2 = token2.validateString()
+            const stringValidator1 = token1.isString()
+            const stringValidator2 = token2.isString()
 
-            expect(validation1).toBeFalsy()
-            expect(validation2).toBeFalsy()
+            expect(stringValidator1).toBeFalsy()
+            expect(stringValidator2).toBeFalsy()
         });  
     });
     
-    describe('validateLength()', () => {
+    describe('isValidLength()', () => {
         test('will return a true boolean if a token\'s length is equal to 1', () => {
-            null;
+            const token1 = new Token('X');
+            const token2 = new Token('O');
+
+            const lengthValidator1 = token1.isValidLength();
+            const lengthValidator2 = token2.isValidLength();
+
+            expect(lengthValidator1).toBeTruthy();
+            expect(lengthValidator2).toBeTruthy();
         });
         
         test('will return a false boolean if a token\'s length is NOT equal to 1', () => {
-            null;
+            // const token1 = new Token('XOX');
+            // const token2 = new Token('ABC'); 
+            
+            // const lengthValidator1 = token1.isValidLength();
+            // const lengthValidator2 = token2.isValidLength();
+
+            // expect(lengthValidator1).toBeFalsy();
+            // expect(lengthValidator2).toBeFalsy();
         });
     });
 });
