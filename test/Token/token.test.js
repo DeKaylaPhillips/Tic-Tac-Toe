@@ -47,14 +47,14 @@ describe('Token Class', () => {
         });
         
         test('will return a false boolean if a token\'s length is NOT equal to 1', () => {
-            // const token1 = new Token('XOX');
-            // const token2 = new Token('ABC'); 
+            const token1 = new Token('XOX');
+            const token2 = new Token('ABC'); 
             
-            // const lengthValidator1 = token1.isValidLength();
-            // const lengthValidator2 = token2.isValidLength();
+            const lengthValidator1 = token1.isValidLength();
+            const lengthValidator2 = token2.isValidLength();
 
-            // expect(lengthValidator1).toBeFalsy();
-            // expect(lengthValidator2).toBeFalsy();
+            expect(lengthValidator1).toBeFalsy();
+            expect(lengthValidator2).toBeFalsy();
         });
     });
 });
