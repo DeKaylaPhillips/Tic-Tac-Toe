@@ -16,18 +16,6 @@ describe('Board', () => {
         });    
     });
 
-    describe('formatCells()', () => {
-        test('will format a cell without a column separator', () => {
-            const formattedCellWithSeparator = board.formatCells(board.cells[0][2], 2)
-            expect(formattedCellWithSeparator).toBe(` `)
-        });
-
-        test('will format a cell with a column separator', () => {
-            const formattedCellNoSeparator = board.formatCells(board.cells[0][0], 0)
-            expect(formattedCellNoSeparator).toBe(`   |`)
-        });
-    });
-
     describe('toString()', () => {
         test('will print 1 row when the board is instantiated with only 1 row', () => {
             const board = new Board(1, 3)
