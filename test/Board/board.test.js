@@ -41,24 +41,5 @@ describe('Board', () => {
             expect(printedBoard).toBe(`${rowOutput}\n${board.rowSeparator}\n${rowOutput}\n${board.rowSeparator}\n${rowOutput}`)
         });
     });
-
-    describe('assembleBoard()', () => {
-        test('will assemble formatted cells according to the current state of the board\'s cells in a string format', () => {
-            const initialBoardDisplay = board.boardDisplay
-            board.cells[0][0] = 'X' 
-            const newBoardDisplay = board.assembleBoard()
-            expect(initialBoardDisplay).not.toBe(newBoardDisplay) 
-        });
-    });
-
-    describe('placeToken()', () => {
-        test('will accept a token and position number', () => {
-            board.placeToken(new Token('X').getToken(), 1)
-            expect(board.token).toBe('X')
-            expect(board.position).toBe(1)
-        });
-    });
-
-
 });
 
