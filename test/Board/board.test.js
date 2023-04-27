@@ -29,5 +29,19 @@ describe('Board', () => {
             expect(printedBoard).toBe(`${rowOutput}\n${board.rowSeparator}\n${rowOutput}\n${board.rowSeparator}\n${rowOutput}`)
         });
     });
+
+    describe('getRow()', () => {
+        test('will return the correlated row number for a given position', () => {
+            const row = board.getRow(4)
+            expect(row).toBe(1)
+        });
+    });
+
+    describe('getColumn()', () => {
+        test('will return the correlated column number for a given position', () => {
+            const column = board.getColumn(5)
+            expect(column).toBe(1)
+        });
+    });
 });
 
