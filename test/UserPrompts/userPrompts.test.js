@@ -10,7 +10,7 @@ describe('UserPrompts()', () => {
     describe('getWelcomeMessage()', () => {
         test('will return a string that welcomes the user to the game', () => {
             const prompt = prompts.getWelcomeMessage()
-            expect(prompt).toBe('\n Welcome to the classic game of Tic-Tac-Toe! \n');
+            expect(prompt).toBe('\nWelcome to the classic game of Tic-Tac-Toe!\n');
         }); 
     }); 
 });
