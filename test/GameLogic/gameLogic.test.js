@@ -14,7 +14,7 @@ describe('GameLogic', () => {
         game = new GameLogic(board, playerToken);
     });
 
-    describe('isWin()', () => {
+    describe('detectRowWin()', () => {
         test('will return a true boolean value when a row filled with the same token is detected', () => {
             board.placeToken(playerToken, 1);
             board.placeToken(playerToken, 2);
