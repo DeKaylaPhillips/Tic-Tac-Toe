@@ -20,4 +20,11 @@ describe('UserPrompts()', () => {
             expect(prompt).toBe('\n|| --- GAME OVER! --- ||\n');
         }); 
     }); 
+    
+    describe('getPlaceTokenPrompt()', () => {
+        test('will return a string informing the user to place a token on the board', () => {
+            const prompt = prompts.getPlaceTokenPrompt()
+            expect(prompt).toBe('\nPlease place a token on the board.\n');
+        }); 
+    });
 });
