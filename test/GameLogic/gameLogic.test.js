@@ -11,24 +11,21 @@ describe('GameLogic', () => {
     beforeEach(() => {
         board = new Board();
         playerToken = new Token('X').getToken();
-        game = new GameLogic(board, playerToken);
+        game = new GameLogic(board, playerToken);  
+        
+        board.placeToken(playerToken, 1);
+        board.placeToken(playerToken, 2);
     });
 
     describe('detectRowWin()', () => {
         test('will return a true boolean value when a row filled with the same token is detected', () => {
-            board.placeToken(playerToken, 1);
-            board.placeToken(playerToken, 2);
-            board.placeToken(playerToken, 3);
-
+            board.placeToken(playerToken, 3); // 'X' | 'X' | 'X' 
             const gameWinDetected = game.detectRowWin();
             expect(gameWinDetected).toBeTruthy();
         });
 
         test('will return a false boolean value when a row filled with the same token is not detected', () => {
-            board.placeToken(playerToken, 1);
-            board.placeToken(playerToken, 2);
-            board.placeToken(playerToken='O', 3);
-
+            board.placeToken(playerToken='O', 3); // 'X' | 'X' | 'O'
             const gameWinDetected = game.detectRowWin();
             expect(gameWinDetected).toBeFalsy(); 
         });
