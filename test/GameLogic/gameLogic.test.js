@@ -4,8 +4,8 @@ import { Token } from "../../lib/Token/token";
 
 describe('GameLogic', () => {
 
-    let board;
     let playerToken;
+    let board;
     let game;
 
     beforeEach(() => {
@@ -16,45 +16,31 @@ describe('GameLogic', () => {
 
     describe('detectRowWin()', () => {
         test('will return a true boolean value when a row filled with the same token is detected', () => {
-            // X | X  | X 
-            // ''| '' | ''
-            // ''| '' | ''
-            board.placeToken(playerToken, 1);
-            board.placeToken(playerToken, 2);
-            board.placeToken(playerToken, 3);
+            let positions = [1, 2, 3]
+            positions.map((cell) => board.placeToken(playerToken, cell))
             const gameWinDetected = game.detectRowWin();
             expect(gameWinDetected).toBeTruthy();
         });
 
         test('will return a true boolean value when a row filled with the same token is detected', () => {
-            // '' | '' | ''
-            // X  | X  | X
-            // '' | '' | ''
-            board.placeToken(playerToken, 4);
-            board.placeToken(playerToken, 5);
-            board.placeToken(playerToken, 6); 
+            let positions = [4, 5, 6]
+            positions.map((cell) => board.placeToken(playerToken, cell))
             const gameWinDetected = game.detectRowWin();
             expect(gameWinDetected).toBeTruthy();
         });
         
         test('will return a true boolean value when a row filled with the same token is detected', () => {
-            // '' | '' | ''
-            // '' | '' | ''
-            // X  | X  | X
-            board.placeToken(playerToken, 7);
-            board.placeToken(playerToken, 8);
-            board.placeToken(playerToken, 9); 
-            const gameWinDetected = game.detectRowWin();
+            let positions = [7, 8, 9]
+            positions.map((cell) => board.placeToken(playerToken, cell))
+            const gameWinDetected = game.detectRowWin()
             expect(gameWinDetected).toBeTruthy();
         });
 
         test('will return a false boolean value when a row filled with the same token is not detected', () => {
-            // X  | X  | O
-            // '' | '' | ''
-            // '' | '' | ''
-            board.placeToken(playerToken, 1);
-            board.placeToken(playerToken, 2);
-            board.placeToken(playerToken = 'O', 3); // 'X' | 'X' | 'O'
+            let positions = [1, 2, 3]
+            positions.map((cell, index) => (index + 1 !== positions[positions.length - 1]) ? 
+                board.placeToken(new Token('X').getToken(), cell) 
+                : board.placeToken(new Token('O').getToken(), cell));
             const gameWinDetected = game.detectRowWin();
             expect(gameWinDetected).toBeFalsy(); 
         });
