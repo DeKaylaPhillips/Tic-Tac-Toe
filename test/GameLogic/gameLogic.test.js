@@ -36,7 +36,7 @@ describe('GameLogic', () => {
         const placeTokenFunc = (cell) => board.placeToken(playerToken, cell);
         const positions = [1, 2, 3];
 
-        test('will return a string token of the winning player', () => { 
+        test('will return a string representation of the winning player\'s token', () => { 
             positions.map(placeTokenFunc);
             const winner = game.getWinningToken();
             expect(winner).toEqual('X');
