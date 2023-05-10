@@ -24,7 +24,7 @@ describe('UserPrompts()', () => {
     describe('getPlaceTokenPrompt()', () => {
         test('will return a string informing the user to place a token on the board', () => {
             const prompt = prompts.getPlaceTokenPrompt()
-            expect(prompt).toBe('\nPlease place a token on the board.\n');
+            expect(prompt).toBe('\nPlease place a token on the board (must be between 1-9).\n');
         }); 
     });
 });
