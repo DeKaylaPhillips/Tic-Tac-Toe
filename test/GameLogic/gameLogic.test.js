@@ -53,4 +53,16 @@ describe('GameLogic', () => {
             expect(winner).toEqual(null);
         });
     });
+
+    describe('detectColumnWin()', () => {
+        const playerToken = new Token('X').getToken(); 
+
+        test('will return a true boolean value when a column filled with the same token is detected', () => {
+        
+        });
+
+        test('will return a false boolean value when a column filled with the same token is detected', () => {
+
+        });
+    });
 });
