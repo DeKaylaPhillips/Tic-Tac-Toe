@@ -55,14 +55,26 @@ describe('GameLogic', () => {
     });
 
     describe('detectColumnWin()', () => {
-        const playerToken = new Token('X').getToken(); 
-
         test('will return a true boolean value when a column filled with the same token is detected', () => {
-        
+            const positions = [[1, 4, 7], [2, 5, 8], [3, 6, 9]];
+            const placeTokenFunc = (cell, board) => board.placeToken(playerToken, cell);
+            positions.forEach((row) => { 
+                const board = new Board();
+                const game = new GameLogic(board, playerToken);
+                row.forEach((col) => placeTokenFunc(col, board));
+                const winDetected = game.detectColumnWin();
+                expect(winDetected).toEqual(true);
+            });
         });
 
-        test('will return a false boolean value when a column filled with the same token is detected', () => {
-
+        test('will return a false boolean value when a column filled with the same token is not detected', () => {
+            const board = new Board();
+            const game = new GameLogic(board, playerToken);
+            const positions = [1, 4, 7];
+            positions.forEach((cell) => positions[positions.length - 1] == cell ? 
+                board.placeToken(playerToken, cell) : board.placeToken(new Token('O').getToken(), cell));    
+            const winDetected = game.detectColumnWin();
+            expect(winDetected).toEqual(false);
         });
     });
 });
