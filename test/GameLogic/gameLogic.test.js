@@ -54,6 +54,7 @@ describe('GameLogic', () => {
         });
     });
 
+<<<<<<< HEAD
     describe('containsWinningColumn()', () => {
         test('will return a true boolean value when a column filled with the same token is detected', () => {
             const positions = [[1, 4, 7], [2, 5, 8], [3, 6, 9]];
@@ -74,6 +75,28 @@ describe('GameLogic', () => {
             positions.forEach((cell) => positions[positions.length - 1] == cell ? 
                 board.placeToken(playerToken, cell) : board.placeToken(new Token('O').getToken(), cell));    
             const winDetected = game.containsWinningColumn();
+=======
+    describe('detectDiagonalWin()', () => {
+        test('will return a true boolean value when a diagonal win is detected', () => {
+            const positions = [[1, 5, 9], [3, 5, 7]];
+            const placeTokenFunc = (cell, board) => board.placeToken(playerToken, cell)
+            positions.forEach((row) => {
+                const board = new Board();
+                const game = new GameLogic(board, playerToken);
+                row.forEach((col) => placeTokenFunc(col, board));
+                const winDetected = game.detectDiagonalWin();
+                expect(winDetected).toBe(true);
+            });
+        });
+
+        test('will return a false boolean value when a diagonal win is not detected in the board', () => {
+            const board = new Board();
+            const game = new GameLogic(board, playerToken);
+            const positions = [1, 5, 9];
+            positions.forEach((cell) => !positions[positions.length - 1] ? 
+                board.placeToken(playerToken, cell) : board.placeToken(new Token('O').getToken(), cell));    
+            const winDetected = game.detectDiagonalWin();
+>>>>>>> ce7a13f (Add tests to the if a diagonal win was detected based on given position numbers; currently in passing state)
             expect(winDetected).toEqual(false);
         });
     });
