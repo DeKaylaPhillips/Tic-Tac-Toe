@@ -56,7 +56,9 @@ describe('GameLogic', () => {
 
     describe('detectDiagonalWin()', () => {
         test('will return a true boolean value when a diagonal win is detected', () => {
-            const positions = [[1, 5, 9], [3, 5, 7]];
+            const positions = [[1, 5, 9], [3, 5, 7]]; 
+            // positions[0] = main diagonal positions    (top-left  -> bottom-right) 
+            // positions[1] = counter diagonal positions (top-right -> bottom-left)
             const placeTokenFunc = (cell, board) => board.placeToken(playerToken, cell)
             positions.forEach((row) => {
                 const board = new Board();
