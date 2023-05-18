@@ -75,6 +75,9 @@ describe('GameLogic', () => {
             positions.forEach((cell) => positions[positions.length - 1] == cell ? 
                 board.placeToken(playerToken, cell) : board.placeToken(new Token('O').getToken(), cell));    
             const winDetected = game.containsWinningColumn();
+            expect(winDetected).toEqual(false);
+        });
+    });
 =======
     describe('detectDiagonalWin()', () => {
         test('will return a true boolean value when a diagonal win is detected', () => {
@@ -86,7 +89,7 @@ describe('GameLogic', () => {
                 const board = new Board();
                 const game = new GameLogic(board, playerToken);
                 row.forEach((col) => placeTokenFunc(col, board));
-                const winDetected = game.detectDiagonalWin();
+                const winDetected = game.containsWinningMainDiagonal();
                 expect(winDetected).toBe(true);
             });
         });
@@ -97,8 +100,7 @@ describe('GameLogic', () => {
             const positions = [1, 5, 9];
             positions.forEach((cell) => !positions[positions.length - 1] ? 
                 board.placeToken(playerToken, cell) : board.placeToken(new Token('O').getToken(), cell));    
-            const winDetected = game.detectDiagonalWin();
->>>>>>> ce7a13f (Add tests to the if a diagonal win was detected based on given position numbers; currently in passing state)
+            const winDetected = game.containsWinningCounterDiagonal();
             expect(winDetected).toEqual(false);
         });
     });
