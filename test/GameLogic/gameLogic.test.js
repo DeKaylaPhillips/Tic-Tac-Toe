@@ -13,7 +13,7 @@ describe('GameLogic', () => {
                 const board = new Board();
                 const game = new GameLogic(board, playerToken);
                 row.forEach((col) => placeTokenFunc(col, board));
-                const winDetected = game.detectRowWin();
+                const winDetected = game.containsWinningRow();
                 expect(winDetected).toEqual(true);
             });
         });
@@ -24,7 +24,7 @@ describe('GameLogic', () => {
             const positions = [1, 2, 3];
             positions.forEach((cell) => !positions[positions.length - 1] ? 
                 board.placeToken(playerToken, cell) : board.placeToken(new Token('O').getToken(), cell));    
-            const winDetected = game.detectRowWin();
+            const winDetected = game.containsWinningRow();
             expect(winDetected).toEqual(false);
         });
     });
@@ -64,7 +64,7 @@ describe('GameLogic', () => {
                 const board = new Board();
                 const game = new GameLogic(board, playerToken);
                 row.forEach((col) => placeTokenFunc(col, board));
-                const winDetected = game.detectDiagonalWin();
+                const winDetected = game.containsWinningMainDiagonal();
                 expect(winDetected).toBe(true);
             });
         });
@@ -75,7 +75,7 @@ describe('GameLogic', () => {
             const positions = [1, 5, 9];
             positions.forEach((cell) => !positions[positions.length - 1] ? 
                 board.placeToken(playerToken, cell) : board.placeToken(new Token('O').getToken(), cell));    
-            const winDetected = game.detectDiagonalWin();
+            const winDetected = game.containsWinningCounterDiagonal();
             expect(winDetected).toEqual(false);
         });
     });
