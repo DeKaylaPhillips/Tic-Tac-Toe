@@ -109,8 +109,7 @@ describe('getWinningToken()', () => {
             expect(winDetected).toEqual(false);
         });
 
-        // TODO: FIX TEST DESCRIPTION*
-        test('will return false when no winners are found', () => {
+        test('will return false boolean value when a column filled with the same token is not detected', () => {
             const positions = [[1, 5, 7]];
             const placeTokenFunc = (cell, board) => board.placeToken(playerToken, cell);
             positions.forEach((row) => { 
