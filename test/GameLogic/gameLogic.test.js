@@ -54,27 +54,41 @@ describe('GameLogic', () => {
         });
     });
 
-    describe('detectDiagonalWin()', () => {
-        test('will return a true boolean value when a diagonal win is detected', () => {
-            const positions = [[1, 5, 9], [3, 5, 7]]; 
-            // positions[0] = main diagonal positions    (top-left  -> bottom-right) 
-            // positions[1] = counter diagonal positions (top-right -> bottom-left)
-            const placeTokenFunc = (cell, board) => board.placeToken(playerToken, cell)
-            positions.forEach((row) => {
-                const board = new Board();
-                const game = new GameLogic(board, playerToken);
-                row.forEach((col) => placeTokenFunc(col, board));
-                const winDetected = game.containsWinningMainDiagonal();
-                expect(winDetected).toBe(true);
-            });
-        });
-
-        test('will return a false boolean value when a diagonal win is not detected in the board', () => {
+    describe('containsWinningMainDiagonal()', () => {
+        test('will return a true boolean value when a main diagonal win is detected', () => {
             const board = new Board();
             const game = new GameLogic(board, playerToken);
-            const positions = [1, 5, 9];
-            positions.forEach((cell) => !positions[positions.length - 1] ? 
-                board.placeToken(playerToken, cell) : board.placeToken(new Token('O').getToken(), cell));    
+            const positions = [1, 5, 9]; // main diagonal positions (top-left  -> bottom-right) 
+            positions.forEach((cell) => board.placeToken(playerToken, cell));
+            const winDetected = game.containsWinningMainDiagonal();
+            expect(winDetected).toBe(true);
+        });
+
+        test('will return a false boolean value when a main diagonal win is not detected in the board', () => {
+            const board = new Board();
+            const game = new GameLogic(board, playerToken);
+            const positions = [1, 5];
+            positions.forEach((cell) => board.placeToken(playerToken, cell)); 
+            const winDetected = game.containsWinningCounterDiagonal();
+            expect(winDetected).toEqual(false);
+        });
+    });
+
+    describe('containsWinningCounterDiagonal()', () => {
+        test('will return a true boolean value when a counter diagonal win is detected', () => {
+            const board = new Board();
+            const game = new GameLogic(board, playerToken);
+            const positions = [3, 5, 7]; 
+            positions.forEach((cell) => board.placeToken(playerToken, cell));
+            const winDetected = game.containsWinningCounterDiagonal();
+            expect(winDetected).toBe(true);
+        });
+
+        test('will return a false boolean value when a counter diagonal win is not detected in the board', () => {
+            const board = new Board();
+            const game = new GameLogic(board, playerToken);
+            const positions = [3, 5];
+            positions.forEach((cell) => board.placeToken(playerToken, cell));
             const winDetected = game.containsWinningCounterDiagonal();
             expect(winDetected).toEqual(false);
         });
