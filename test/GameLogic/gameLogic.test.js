@@ -93,7 +93,7 @@ describe('GameLogic', () => {
             const game = new GameLogic(board, playerToken);
             const positions = [1, 5];
             positions.forEach((cell) => board.placeToken(playerToken, cell)); 
-            const winDetected = game.containsWinningCounterDiagonal();
+            const winDetected = game.containsWinningMainDiagonal();
             expect(winDetected).toEqual(false);
         });
     });
