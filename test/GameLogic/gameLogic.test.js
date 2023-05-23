@@ -64,8 +64,9 @@ describe('GameLogic', () => {
             game = new GameLogic(board, playerToken);
         });
         
-        test('will return a true boolean value when a main diagonal win is detected', () => {
-            const positions = [1, 5, 9]; // main diagonal positions (top-left  -> bottom-right) 
+        test('will return a true boolean value when a main diagonal win (top-left to bottom-right) is detected', () => {
+            const positions = [1, 5, 9];
+            const placeTokenFn = (cell) => board.placeToken(playerToken, cell)
             positions.forEach(placeTokenFn);
             const winDetected = game.containsWinningMainDiagonal();
             expect(winDetected).toBe(true);
@@ -74,7 +75,7 @@ describe('GameLogic', () => {
         test('will return a false boolean value when a main diagonal win is not detected in the board', () => {
             const positions = [1, 5]
             positions.forEach(placeTokenFn); 
-            const winDetected = game.containsWinningCounterDiagonal();
+            const winDetected = game.containsWinningMainDiagonal();
             expect(winDetected).toEqual(false);
         });
     });
@@ -89,7 +90,7 @@ describe('GameLogic', () => {
             game = new GameLogic(board, playerToken);
         });
 
-        test('will return a true boolean value when a counter diagonal win is detected', () => {
+        test('will return a true boolean value when a counter diagonal win (top-right to bottom-left) is detected', () => {
             const positions = [3, 5, 7]; 
             positions.forEach(placeTokenFn);
             const winDetected = game.containsWinningCounterDiagonal();
