@@ -58,8 +58,8 @@ describe('Board', () => {
             const positions = [1, 5, 9];
             const placeTokenFn = (num) => num != positions[positions.length - 1] ? board.placeToken(token1, num) : board.placeToken(token2, num);
             positions.forEach((pos) => placeTokenFn(pos))
-            const columns = board.getMainDiagonalCells();
-            expect(columns).toEqual(['X', 'X', 'Z']);
+            const counterDiagonalCells = board.getMainDiagonalCells();
+            expect(counterDiagonalCells).toEqual(['X', 'X', 'Z']);
         });
     });
 
@@ -71,8 +71,8 @@ describe('Board', () => {
             const positions = [3, 5, 7];
             const placeTokenFn = (num) => num != positions[positions.length - 1] ? board.placeToken(token1, num) : board.placeToken(token2, num);
             positions.forEach((pos) => placeTokenFn(pos))
-            const columns = board.getCounterDiagonalCells();
-            expect(columns).toEqual(['?', '?', 'S']);
+            const counterDiagonalCells = board.getCounterDiagonalCells();
+            expect(counterDiagonalCells).toEqual(['?', '?', 'S']);
         });
     });
 });
