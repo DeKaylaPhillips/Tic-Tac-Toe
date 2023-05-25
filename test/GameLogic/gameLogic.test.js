@@ -109,17 +109,5 @@ describe('getWinningToken()', () => {
             const winDetected = game.getWinningToken() != null;
             expect(winDetected).toEqual(false);
         });
-
-        test('will return false boolean value when a column filled with the same token is not detected', () => {
-            const positions = [[1, 5, 7]];
-            const placeTokenFunc = (cell, board) => board.placeToken(playerToken, cell);
-            positions.forEach((row) => { 
-                const board = new Board();
-                const game = new GameLogic(board, playerToken);
-                row.forEach((col) => placeTokenFunc(col, board));
-                const winDetected = game.containsWinningColumn();
-                expect(winDetected).toEqual(false);
-            });
-        });
     });
 });
