@@ -74,16 +74,23 @@ describe('Board', () => {
         });
     });
 
-    describe('detects full Tic-Tac-Toe board', () => {
-        test('will return a true boolean value when all spaces in the board are filled', () => {
+    describe('isFilledWithTokens()', () => {
+        const token1 = new Token('X');
+        const token2 = new Token('O');
+        const placeTokenFunc = (cell) => (cell % 2 == 0 ? board.placeToken(token1, cell) : board.placeToken(token2, cell));
+
+        test('returns a true boolean value when all spaces in the board are filled', () => {
             const positions = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-            const token1 = new Token('X');
-            const token2 = new Token('O');
-            const placeTokenFunc = (cell) => (cell % 2 == 0 ? board.placeToken(token1, cell) : board.placeToken(token2, cell));
             positions.forEach((row) => row.forEach((col) => placeTokenFunc(col)));
-            console.log(board.toString())
-            const fullBoardDetected = board.isFilledWithTokens()
-            expect(fullBoardDetected).toBe(true)
+            const fullBoardDetected = board.isFilledWithTokens();
+            expect(fullBoardDetected).toBe(true);
+        });
+
+        test('returns a false boolean value when all spaces in the board are not filled', () => {
+            const positions = [[1, 2, 3], [4, 5, 6]];
+            positions.forEach((row) => row.forEach((col) => placeTokenFunc(col)));
+            const fullBoardDetected = board.isFilledWithTokens();
+            expect(fullBoardDetected).toBe(false);
         });
     });
 });

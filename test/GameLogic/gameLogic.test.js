@@ -9,7 +9,7 @@ describe('getWinningToken()', () => {
     describe('detects winning row combination', () => {
         test('will return a true boolean value when a row win is detected', () => {
             const positions = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-            const placeTokenFunc = (col, board) => board.placeToken(playerToken, col);
+            const placeTokenFunc = (cell, board) => board.placeToken(playerToken, cell);
             positions.forEach((row) => {
                 const board = new Board();
                 const game = new GameLogic(board, playerToken.getToken());
@@ -24,7 +24,7 @@ describe('getWinningToken()', () => {
             const board = new Board();
             const playerToken2 = new Token('O');
             const game = new GameLogic(board, playerToken.getToken());
-            const placeTokenFunc = (col) => col != positions[positions.length - 1] ? board.placeToken(playerToken, col) : board.placeToken(playerToken2, col);
+            const placeTokenFunc = (cell) => cell != positions[positions.length - 1] ? board.placeToken(playerToken, cell) : board.placeToken(playerToken2, cell);
             positions.forEach(placeTokenFunc);
             const winDetected = game.getWinningToken() != null;
             expect(winDetected).toEqual(false);
@@ -48,9 +48,9 @@ describe('getWinningToken()', () => {
             const positions = [1, 4, 7];
             const board = new Board();
             const game = new GameLogic(board, playerToken.getToken());
-            const playerToken2 = new Token('O')
-            const placeTokenFunc = (col) => col != positions[positions.length - 1] ? board.placeToken(playerToken, col) : board.placeToken(playerToken2, col);
-            positions.forEach(placeTokenFunc);
+            const playerToken2 = new Token('O');
+            const placeTokenFunc = (cell) => cell != positions[positions.length - 1] ? board.placeToken(playerToken, cell) : board.placeToken(playerToken2, cell);
+            positions.forEach(placeTokenFunc)
             const winDetected = game.getWinningToken() != null;
             expect(winDetected).toEqual(false);
         });
@@ -76,7 +76,7 @@ describe('getWinningToken()', () => {
         test('will return a false boolean value when a main diagonal win (top-left to bottom-right) is not detected', () => {
             const positions = [1, 5, 9];
             const playerToken2 = new Token('O')
-            const placeTokenFunc = (col) => col != positions[positions.length - 1] ? board.placeToken(playerToken, col) : board.placeToken(playerToken2, col);
+            const placeTokenFunc = (cell) => cell != positions[positions.length - 1] ? board.placeToken(playerToken, cell) : board.placeToken(playerToken2, cell);
             positions.forEach(placeTokenFunc);
             const winDetected = game.getWinningToken() != null;
             expect(winDetected).toEqual(false);
@@ -102,7 +102,7 @@ describe('getWinningToken()', () => {
         test('will return a false boolean value when a counter diagonal win (top-right to bottom-left) is not detected', () => {
             const positions = [3, 5];
             const playerToken2 = new Token('O')
-            const placeTokenFunc = (col) => col != positions[positions.length - 1] ? board.placeToken(playerToken, col) : board.placeToken(playerToken2, col);
+            const placeTokenFunc = (cell) => cell != positions[positions.length - 1] ? board.placeToken(playerToken, cell) : board.placeToken(playerToken2, cell);
             positions.forEach(placeTokenFunc);
             const winDetected = game.getWinningToken() != null;
             expect(winDetected).toEqual(false);
