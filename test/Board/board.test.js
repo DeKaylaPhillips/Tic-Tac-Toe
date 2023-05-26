@@ -26,29 +26,55 @@ describe('Board', () => {
         test('will return an array data structure used to store each row and column in the board', () => {
             const cellStructure = board.getCells();
             expect(cellStructure).toBe(board.cells);
-        });    
-    });
-
-    describe('getRow()', () => {
-        test('will return the correlated row number for a valid position', () => {
-            const row = board.getRow(4);
-            expect(row).toBe(1);
-        });
-    });
- 
-    describe('getColumn()', () => {
-        test('will return the correlated column number for a valid position', () => {
-            const column = board.getColumn(5);
-            expect(column).toBe(1);
         });
     });
 
     describe('placeToken()', () => {
         test('will place a valid token in the board when a valid position is accepted', () => {
-            board.placeToken(new Token('X').getToken(), 2);
+            board.placeToken(new Token('X'), 2);
             const cells = board.getCells();
-            expect(cells).toStrictEqual([['', 'X', ''],['', '', ''],['', '', '']]);
+            expect(cells).toStrictEqual([['', 'X', ''], ['', '', ''], ['', '', '']]);
+        });
+    });
+
+    describe('getColumnCells()', () => {
+        const token1 = new Token('X');
+        const token2 = new Token('?');
+
+        test('returns a data structure containing tokens detected in each individual column', () => {
+            const positions = [[1, 4, 7], [2, 5, 8], [3, 6, 9]];
+            const placeTokenFn = (arr, num) => num != arr[arr.length - 1] ? board.placeToken(token1, num) : board.placeToken(token2, num);
+            positions.forEach((col) => col.forEach((pos) => placeTokenFn(col, pos)))
+            const columns = board.getColumnCells();
+            expect(columns).toEqual([['X', 'X', '?'], ['X', 'X', '?'], ['X', 'X', '?']]);
+        });
+    });
+
+    describe('getMainDiagonalCells()', () => {
+        const token1 = new Token('X');
+        const token2 = new Token('Z');
+
+        test('returns a data structure containing tokens detected in each main diagonal cell', () => {
+            const positions = [1, 5, 9];
+            const placeTokenFn = (num) => num != positions[positions.length - 1] ? board.placeToken(token1, num) : board.placeToken(token2, num);
+            positions.forEach((pos) => placeTokenFn(pos))
+            const mainDiagonalCells = board.getMainDiagonalCells();
+            expect(mainDiagonalCells).toEqual(['X', 'X', 'Z']);
+        });
+    });
+
+    describe('getCounterDiagonalCells()', () => {
+        const token1 = new Token('?');
+        const token2 = new Token('S');
+
+        test('returns a data structure containing tokens detected in each main diagonal cell', () => {
+            const positions = [3, 5, 7];
+            const placeTokenFn = (num) => num != positions[positions.length - 1] ? board.placeToken(token1, num) : board.placeToken(token2, num);
+            positions.forEach((pos) => placeTokenFn(pos))
+            const counterDiagonalCells = board.getCounterDiagonalCells();
+            expect(counterDiagonalCells).toEqual(['?', '?', 'S']);
         });
     });
 });
+
 
