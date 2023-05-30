@@ -99,8 +99,6 @@ describe('getWinningToken()', () => {
             const winDetected = game.getWinningToken() != null;
             expect(winDetected).toBe(true);
         });
-    
-        
         test('will return a false boolean value when a counter diagonal win (top-right to bottom-left) is not detected', () => {
             const positions = [3, 5];
             const playerToken2 = new Token('O')
