@@ -48,9 +48,9 @@ describe('getWinningToken()', () => {
             const positions = [1, 4, 7];
             const board = new Board();
             const game = new GameLogic(board, playerToken.getToken());
-            const playerToken2 = new Token('O');
+            const playerToken2 = new Token('O')
             const placeTokenFunc = (col) => col != positions[positions.length - 1] ? board.placeToken(playerToken, col) : board.placeToken(playerToken2, col);
-            positions.forEach(placeTokenFunc)
+            positions.forEach(placeTokenFunc);
             const winDetected = game.getWinningToken() != null;
             expect(winDetected).toEqual(false);
         });
@@ -99,7 +99,6 @@ describe('getWinningToken()', () => {
             const winDetected = game.getWinningToken() != null;
             expect(winDetected).toBe(true);
         });
-
         test('will return a false boolean value when a counter diagonal win (top-right to bottom-left) is not detected', () => {
             const positions = [3, 5];
             const playerToken2 = new Token('O')
