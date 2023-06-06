@@ -62,7 +62,7 @@ describe('Board', () => {
         });
     });
 
-    describe('getCounterDiagonalCells()', () => {
+describe('getCounterDiagonalCells()', () => {
         test('returns a data structure containing tokens detected in each main diagonal cell', () => {
             const token1 = new Token('?');
             const token2 = new Token('S');
