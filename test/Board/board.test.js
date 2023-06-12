@@ -1,5 +1,6 @@
 import { Board } from '../../lib/Board/board'
 import { Token } from '../../lib/Token/token'
+import { Computer } from '../../lib/Computer/computer'
 
 describe('Board', () => {
     let board;
@@ -62,7 +63,7 @@ describe('Board', () => {
         });
     });
 
-describe('getCounterDiagonalCells()', () => {
+    describe('getCounterDiagonalCells()', () => {
         test('returns a data structure containing tokens detected in each main diagonal cell', () => {
             const token1 = new Token('?');
             const token2 = new Token('S');
@@ -81,7 +82,7 @@ describe('getCounterDiagonalCells()', () => {
 
         test('returns a true boolean value when all spaces in the board are filled', () => {
             const positions = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-            positions.forEach((row) => row.forEach((col) => placeTokenFunc(col)));
+            positions.forEach((row, col) => row.forEach((col) => placeTokenFunc(col)));
             const fullBoardDetected = board.isFilledWithTokens();
             expect(fullBoardDetected).toBe(true);
         });
@@ -93,6 +94,16 @@ describe('getCounterDiagonalCells()', () => {
             expect(fullBoardDetected).toBe(false);
         });
     });
+
+    describe('placeTokenInRandomPosition()', () => {
+        test('updates the board for the current computer player by placing a token in a random position IF position is valid', () => {
+            const player1 = new Token('X')
+            const computerPlayer = new Computer(player1, new Token('O'));
+            const potentialRowMatches = [[['X','','']], [['','X','']], [['','','X']], []];
+            const hasUpdatedRow = (row, col) => row[col] === player1.getToken();
+            board.placeTokenInRandomPosition(computerPlayer);
+            const rowWithToken = board.getCells().filter((row, col) => hasUpdatedRow(row, col))
+            expect(potentialRowMatches).toContainEqual(rowWithToken)
+        });
+    });
 });
-
-
